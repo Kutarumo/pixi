@@ -1,5 +1,9 @@
-class Player {
+import { Entity } from './Entity.js';
+import { Shoot } from './Shoot.js';
+
+class Player extends Entity {
     constructor(app) {
+        super(app);
         this.app = app;
         this.sprite = null;
         this.isLeftKeyDown = false;
@@ -13,6 +17,7 @@ class Player {
             if (resources.python) {
                 this.createSprite(resources.python.texture);
                 this.setupEventListeners();
+                this.addToStage();
                 this.app.ticker.add(this.update.bind(this));
             } else {
                 console.error("L'image 'python' n'a pas été chargée correctement.");
@@ -32,6 +37,10 @@ class Player {
         window.addEventListener('keydown', this.handleKeyDown.bind(this));
         window.addEventListener('keyup', this.handleKeyUp.bind(this));
     }
+
+    shoot(){
+        new Shoot(this.app);
+    }
   
     handleKeyDown(event) {
         if (event.key === 'ArrowLeft') { this.isLeftKeyDown = true; } 
@@ -41,6 +50,7 @@ class Player {
     handleKeyUp(event) {
         if (event.key === 'ArrowLeft') { this.isLeftKeyDown = false; } 
         else if (event.key === 'ArrowRight') { this.isRightKeyDown = false; }
+        else if (event.key == ' ') { const shoot = new Shoot(this.app) }
     }
   
     update() {

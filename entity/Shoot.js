@@ -1,3 +1,45 @@
-class Shoot {
-    
+import { Entity } from './Entity.js';
+
+class Shoot extends Entity {
+
+    constructor(app) {
+        super(app)
+        this.app = app
+        this.sprite = null
+        this.speed = 2
+
+        this.loader = new PIXI.Loader();
+
+        this.loader.add('ball', './ball.png').load((loader, resources) => {
+            console.log(resources);
+  
+            if (resources.ball) {
+                this.createSprite(resources.ball.texture);
+                this.addToStage();
+                this.app.ticker.add(this.update.bind(this));
+            } else {
+                console.error("L'image 'ball' n'a pas été chargée correctement.");
+            }
+        });
+    }
+
+    createSprite(texture) {
+        this.sprite = new PIXI.Sprite(texture);
+        this.sprite.scale.set(0.05, 0.05);
+        this.sprite.x = 250;
+        this.sprite.y = 350;
+        this.app.stage.addChild(this.sprite);
+    }
+
+    update() {  
+        this.sprite.y -= this.speed;
+        if (this.sprite.y < -this.sprite.height) {
+            this.sprite.destroy();        
+        }
+    }
+
+    destroy() {
+        this.app.destroyObject(this);
+    }
 }
+export { Shoot };
