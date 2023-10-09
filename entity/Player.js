@@ -2,6 +2,7 @@ import { Entity } from './Entity.js';
 import { Shoot } from './Shoot.js';
 
 class Player extends Entity {
+
     constructor(app) {
         super(app);
         this.app = app;
@@ -32,6 +33,10 @@ class Player extends Entity {
         this.sprite.y = 350;
         this.app.stage.addChild(this.sprite);
     }
+
+    addToStage() {
+        this.app.stage.addChild(this.sprite);
+    }
   
     setupEventListeners() {
         window.addEventListener('keydown', this.handleKeyDown.bind(this));
@@ -39,7 +44,9 @@ class Player extends Entity {
     }
 
     shoot(){
-        new Shoot(this.app);
+        const playerCoord = [this.sprite.x, this.sprite.y];
+        const myPlayer = { "player": playerCoord};
+        new Shoot(this.app, myPlayer);
     }
   
     handleKeyDown(event) {
@@ -50,7 +57,7 @@ class Player extends Entity {
     handleKeyUp(event) {
         if (event.key === 'ArrowLeft') { this.isLeftKeyDown = false; } 
         else if (event.key === 'ArrowRight') { this.isRightKeyDown = false; }
-        else if (event.key == ' ') { const shoot = new Shoot(this.app) }
+        else if (event.key == ' ') { const shoot = this.shoot() }
     }
   
     update() {

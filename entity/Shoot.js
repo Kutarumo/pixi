@@ -2,17 +2,18 @@ import { Entity } from './Entity.js';
 
 class Shoot extends Entity {
 
-    constructor(app) {
-        super(app)
-        this.app = app
-        this.sprite = null
-        this.speed = 2
+    constructor(app, myPlayer) {
+        super(app);
+        this.app = app;
+        this.player = myPlayer.player;
+        this.sprite = null;
+        this.speed = 2;
 
         this.loader = new PIXI.Loader();
 
         this.loader.add('ball', './ball.png').load((loader, resources) => {
             console.log(resources);
-  
+
             if (resources.ball) {
                 this.createSprite(resources.ball.texture);
                 this.addToStage();
@@ -26,20 +27,26 @@ class Shoot extends Entity {
     createSprite(texture) {
         this.sprite = new PIXI.Sprite(texture);
         this.sprite.scale.set(0.05, 0.05);
-        this.sprite.x = 250;
-        this.sprite.y = 350;
+        this.sprite.x = this.player[0];
+        this.sprite.y = this.player[1];
+    }
+
+    addToStage() {
         this.app.stage.addChild(this.sprite);
     }
 
-    update() {  
+    update() {
+        console.log(this.player)
         this.sprite.y -= this.speed;
         if (this.sprite.y < -this.sprite.height) {
-            this.sprite.destroy();        
+            this.destroy();
         }
     }
 
     destroy() {
-        this.app.destroyObject(this);
+        this.app.stage.removeChild(this.sprite);
+        super.destroy(); // Appelez la méthode de la classe parent pour effectuer des opérations supplémentaires si nécessaire
     }
 }
+
 export { Shoot };
