@@ -12,14 +12,17 @@ class Entity {
     removeSprite(sprite) {
         const index = this.entities.indexOf(sprite);
         if (index !== -1) {
-            this.entities.splice(index, 1);
             this.app.stage.removeChild(sprite);
+            this.entities.splice(index, 1);
         }
     }
 
     update() {
+        console.log(this.entities)
         for (const sprite of this.entities) {
-            // Vous pouvez ajouter ici toute logique de mise à jour spécifique à chaque sprite
+            if (sprite.y < 0) {
+                this.removeSprite(sprite)
+            } 
         }
     }
 
@@ -32,3 +35,5 @@ class Entity {
         this.entities = [];
     }
 }
+
+export { Entity };

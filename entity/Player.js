@@ -1,11 +1,11 @@
 import { Entity } from './Entity.js';
 import { Shoot } from './Shoot.js';
 
-class Player extends Entity {
+class Player {
 
     constructor(app) {
-        super(app);
         this.app = app;
+        this.shoots = new Entity(app)
         this.sprite = null;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
@@ -19,6 +19,7 @@ class Player extends Entity {
                 this.createSprite(resources.python.texture);
                 this.setupEventListeners();
                 this.addToStage();
+                this.addShootPool();
                 this.app.ticker.add(this.update.bind(this));
             } else {
                 console.error("L'image 'python' n'a pas été chargée correctement.");
@@ -37,18 +38,19 @@ class Player extends Entity {
     addToStage() {
         this.app.stage.addChild(this.sprite);
     }
-  
+    
+    addShootPool() {
+        if (this.shoots.length == 0) return 
+        for (let i = 0; i < this.shoots.length; i++) {
+            this.app.stage.addChild(this.shoots[i])
+        }
+    }
+
     setupEventListeners() {
         window.addEventListener('keydown', this.handleKeyDown.bind(this));
         window.addEventListener('keyup', this.handleKeyUp.bind(this));
     }
 
-    shoot(){
-        const playerCoord = [this.sprite.x, this.sprite.y];
-        const myPlayer = { "player": playerCoord};
-        new Shoot(this.app, myPlayer);
-    }
-  
     handleKeyDown(event) {
         if (event.key === 'ArrowLeft') { this.isLeftKeyDown = true; } 
         else if (event.key === 'ArrowRight') { this.isRightKeyDown = true; }
@@ -57,7 +59,9 @@ class Player extends Entity {
     handleKeyUp(event) {
         if (event.key === 'ArrowLeft') { this.isLeftKeyDown = false; } 
         else if (event.key === 'ArrowRight') { this.isRightKeyDown = false; }
-        else if (event.key == ' ') { const shoot = this.shoot() }
+        else if (event.key == ' ') {
+            this.shoots.addSprite(new Shoot(this.app, this.sprite.x, this.sprite.y))
+        }
     }
   
     update() {

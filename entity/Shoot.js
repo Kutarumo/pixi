@@ -2,10 +2,10 @@ import { Entity } from './Entity.js';
 
 class Shoot extends Entity {
 
-    constructor(app, myPlayer) {
+    constructor(app, x, y) {
         super(app);
         this.app = app;
-        this.player = myPlayer.player;
+        this.coord = [x, y]
         this.sprite = null;
         this.speed = 2;
 
@@ -27,25 +27,21 @@ class Shoot extends Entity {
     createSprite(texture) {
         this.sprite = new PIXI.Sprite(texture);
         this.sprite.scale.set(0.05, 0.05);
-        this.sprite.x = this.player[0];
-        this.sprite.y = this.player[1];
+        this.sprite.x = this.coord[0];
+        this.sprite.y = this.coord[1];
     }
 
     addToStage() {
         this.app.stage.addChild(this.sprite);
     }
 
-    update() {
-        console.log(this.player)
-        this.sprite.y -= this.speed;
-        if (this.sprite.y < -this.sprite.height) {
-            this.destroy();
-        }
+    shootToPlayer(x, y) {
+        this.sprite.x = x;
+        this.sprite.y = y;
     }
 
-    destroy() {
-        this.app.stage.removeChild(this.sprite);
-        super.destroy(); // Appelez la méthode de la classe parent pour effectuer des opérations supplémentaires si nécessaire
+    update() {
+        this.sprite.y -= this.speed;
     }
 }
 
