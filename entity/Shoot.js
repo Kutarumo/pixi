@@ -1,9 +1,8 @@
-import { Entity } from './Entity.js';
+import { PoolEntities } from './PoolEntities.js';
 
-class Shoot extends Entity {
+class Shoot {
 
     constructor(app, x, y) {
-        super(app);
         this.app = app;
         this.coord = [x, y]
         this.sprite = null;
@@ -32,7 +31,7 @@ class Shoot extends Entity {
     }
 
     addToStage() {
-        this.app.stage.addChild(this.sprite);
+        this.app.stage.addChild(this.sprite)
     }
 
     shootToPlayer(x, y) {

@@ -1,11 +1,11 @@
-import { Entity } from './Entity.js';
+import { PoolEntities } from './PoolEntities.js';
 import { Shoot } from './Shoot.js';
 
 class Player {
 
     constructor(app) {
         this.app = app;
-        this.shoots = new Entity(app)
+        this.shoots = new PoolEntities()
         this.sprite = null;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
@@ -18,8 +18,8 @@ class Player {
             if (resources.python) {
                 this.createSprite(resources.python.texture);
                 this.setupEventListeners();
+                this.addPool()
                 this.addToStage();
-                this.addShootPool();
                 this.app.ticker.add(this.update.bind(this));
             } else {
                 console.error("L'image 'python' n'a pas été chargée correctement.");
@@ -35,15 +35,16 @@ class Player {
         this.app.stage.addChild(this.sprite);
     }
 
+    addPool(){
+        if (this.shoots.entities.length == 0) return
+        this.shoots.entities.forEach(entity => {
+            // Ajoutez l'entité à la scène (stage) pour qu'elle soit affichée
+            this.app.stage.addChild(entity.sprite);
+        });
+    }
+
     addToStage() {
         this.app.stage.addChild(this.sprite);
-    }
-    
-    addShootPool() {
-        if (this.shoots.length == 0) return 
-        for (let i = 0; i < this.shoots.length; i++) {
-            this.app.stage.addChild(this.shoots[i])
-        }
     }
 
     setupEventListeners() {
@@ -55,15 +56,26 @@ class Player {
         if (event.key === 'ArrowLeft') { this.isLeftKeyDown = true; } 
         else if (event.key === 'ArrowRight') { this.isRightKeyDown = true; }
     }
-  
+
     handleKeyUp(event) {
         if (event.key === 'ArrowLeft') { this.isLeftKeyDown = false; } 
         else if (event.key === 'ArrowRight') { this.isRightKeyDown = false; }
         else if (event.key == ' ') {
-            this.shoots.addSprite(new Shoot(this.app, this.sprite.x, this.sprite.y))
+            if (this.shoots.entities.length == 0) {
+                this.shoots.addEntity(new Shoot(this.app, this.PlayerCenterX, this.PlayerCenterY))
+            }
+            
         }
     }
-  
+
+    PlayerCenterX() {
+        return this.sprite.x + (this.sprite.width/2);
+    }
+    
+    PlayerCenterY() {
+        return this.sprite.y + (this.sprite.height/2);
+    }
+
     update() {
         const playerSpeed = 5;
         if (this.isLeftKeyDown) {
