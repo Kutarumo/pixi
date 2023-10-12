@@ -1,8 +1,9 @@
-import { PoolEntities } from './PoolEntities.js';
+import { Entity } from './Entity.js';
 
-class Shoot {
+class Bullet extends Entity {
 
     constructor(app, x, y) {
+        super(app)
         this.app = app;
         this.coord = [x, y]
         this.sprite = null;
@@ -15,7 +16,6 @@ class Shoot {
 
             if (resources.ball) {
                 this.createSprite(resources.ball.texture);
-                this.addToStage();
                 this.app.ticker.add(this.update.bind(this));
             } else {
                 console.error("L'image 'ball' n'a pas été chargée correctement.");
@@ -28,9 +28,6 @@ class Shoot {
         this.sprite.scale.set(0.05, 0.05);
         this.sprite.x = this.coord[0];
         this.sprite.y = this.coord[1];
-    }
-
-    addToStage() {
         this.app.stage.addChild(this.sprite)
     }
 
@@ -40,8 +37,12 @@ class Shoot {
     }
 
     update() {
+        if (this.hp <= 0) {
+            this.destroy();
+            return;
+        }
         this.sprite.y -= this.speed;
     }
 }
 
-export { Shoot };
+export { Bullet };

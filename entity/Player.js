@@ -1,11 +1,11 @@
-import { PoolEntities } from './PoolEntities.js';
-import { Shoot } from './Shoot.js';
+import { Entity } from './Entity.js';
+import { Bullet } from './Bullet.js';
 
-class Player {
+class Player extends Entity {
 
     constructor(app) {
+        super(app)
         this.app = app;
-        this.shoots = new PoolEntities()
         this.sprite = null;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
@@ -18,8 +18,6 @@ class Player {
             if (resources.python) {
                 this.createSprite(resources.python.texture);
                 this.setupEventListeners();
-                this.addPool()
-                this.addToStage();
                 this.app.ticker.add(this.update.bind(this));
             } else {
                 console.error("L'image 'python' n'a pas été chargée correctement.");
@@ -35,18 +33,6 @@ class Player {
         this.app.stage.addChild(this.sprite);
     }
 
-    addPool(){
-        if (this.shoots.entities.length == 0) return
-        this.shoots.entities.forEach(entity => {
-            // Ajoutez l'entité à la scène (stage) pour qu'elle soit affichée
-            this.app.stage.addChild(entity.sprite);
-        });
-    }
-
-    addToStage() {
-        this.app.stage.addChild(this.sprite);
-    }
-
     setupEventListeners() {
         window.addEventListener('keydown', this.handleKeyDown.bind(this));
         window.addEventListener('keyup', this.handleKeyUp.bind(this));
@@ -58,13 +44,12 @@ class Player {
     }
 
     handleKeyUp(event) {
-        if (event.key === 'ArrowLeft') { this.isLeftKeyDown = false; } 
-        else if (event.key === 'ArrowRight') { this.isRightKeyDown = false; }
+        if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
+        else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
         else if (event.key == ' ') {
-            if (this.shoots.entities.length == 0) {
-                this.shoots.addEntity(new Shoot(this.app, this.PlayerCenterX, this.PlayerCenterY))
-            }
-            
+            const bullet = new Bullet(this.app, this.PlayerCenterX(), this.PlayerCenterY());
+            this.app.stage.addChild(bullet.sprite);
+            game.pool.push(bullet);
         }
     }
 
@@ -77,7 +62,11 @@ class Player {
     }
 
     update() {
-        const playerSpeed = 5;
+        const playerSpeed = 3;
+        if (this.hp <= 0) {
+            this.destroy();
+            return;
+        }
         if (this.isLeftKeyDown) {
             if (this.sprite.x - playerSpeed >= 0) {
                 this.sprite.x -= playerSpeed;
@@ -90,5 +79,5 @@ class Player {
         }
     }
 }
-  
+
 export { Player };
