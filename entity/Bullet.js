@@ -2,16 +2,17 @@ import { Entity } from './Entity.js';
 
 class Bullet extends Entity {
 
-    constructor(app, x, y) {
+    constructor(app) {
         super(app)
         this.app = app;
-        this.coord = [x, y]
+        //this.owner = player;
+        this.coord = []
         this.sprite = null;
         this.speed = 2;
 
         this.loader = new PIXI.Loader();
 
-        this.loader.add('ball', './ball.png').load((loader, resources) => {
+        this.loader.add('ball', './entity/assets/ball.png').load((loader, resources) => {
             console.log(resources);
 
             if (resources.ball) {

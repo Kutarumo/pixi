@@ -12,25 +12,34 @@ class Player extends Entity {
     
         this.loader = new PIXI.Loader();
     
-        this.loader.add('python', './python.png').load((loader, resources) => {
+        this.loader.add('sprite_player', './entity/assets/sprite_player.png').load((loader, resources) => {
             console.log(resources);
-  
-            if (resources.python) {
-                this.createSprite(resources.python.texture);
+            if (resources.sprite_player) {
+                this.createSprite(resources.sprite_player.texture);                
                 this.setupEventListeners();
                 this.app.ticker.add(this.update.bind(this));
             } else {
-                console.error("L'image 'python' n'a pas été chargée correctement.");
+                console.error("L'image 'sprite_player' n'a pas été chargée correctement.");
             }
         });
     }
   
     createSprite(texture) {
         this.sprite = new PIXI.Sprite(texture);
-        this.sprite.scale.set(0.05, 0.05);
         this.sprite.x = 250;
         this.sprite.y = 350;
+        this.createCollision();
+        this.sprite.scale.set(0.3, 0.3);
         this.app.stage.addChild(this.sprite);
+    }
+
+    createCollision() {
+        this.boundingBox = new PIXI.Graphics();
+        this.boundingBox.beginFill(0x000000, 0);
+        this.boundingBox.lineStyle(1, 0xFF0000);
+        this.boundingBox.drawRect(0, 0, this.sprite.width, this.sprite.height);
+        this.boundingBox.endFill();
+        this.sprite.addChild(this.boundingBox);
     }
 
     setupEventListeners() {
@@ -47,9 +56,9 @@ class Player extends Entity {
         if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
         else if (event.key == ' ') {
-            const bullet = new Bullet(this.app, this.PlayerCenterX(), this.PlayerCenterY());
-            this.app.stage.addChild(bullet.sprite);
+            this.bullet = new Bullet(this.app);
             game.pool.push(bullet);
+            this.app.stage.addChild(this.bullet.sprite);
         }
     }
 
