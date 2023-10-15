@@ -13,6 +13,10 @@ class Entity {
         return this.sprite.y + (this.sprite.height/2);
     }
 
+    healthManager(hp) {
+        this.hp += hp
+    }
+
     update() {}
 
     destroy() {

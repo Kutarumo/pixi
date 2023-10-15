@@ -1,6 +1,6 @@
 import { Player } from './entity/Player.js';
 import { Bullet } from './entity/Bullet.js';
-import { Score } from './entity/Score.js'; // Assurez-vous de fournir le bon chemin d'accès au fichier
+import { Score } from './entity/Score.js';
 import { Alien } from './entity/Alien.js';
 
 class MainGame {
@@ -10,8 +10,19 @@ class MainGame {
         this.pool = [];
         this.loadGame()
 
+        this.engine = Matter.Engine.create();
+        this.setupPhysics();
+
         this.pool.push(new Score(this.app, this.pool, 0, 0));
+        
         this.pool.push(new Player(this.app, this.pool));
+        const playerBody = Matter.Bodies.rectangle(
+            this.pool[1].sprite.x,
+            this.pool[1].sprite.y,
+            this.pool[1].sprite.width,
+            this.pool[1].sprite.height
+        );
+        this.pool[1].matterBody = playerBody;
     
         const aliens = [];
 
@@ -33,8 +44,25 @@ class MainGame {
         }
 
         this.pool.push(aliens);
-        this.pool[0].saveScore();
-        this.pool[0].getScores();
+        // Créez un corps Matter.js pour chaque alien et associez-les aux entités Pixi.js.
+        for (const row of this.pool[2]) {
+            for (const alien of row) {
+                const alienBody = Matter.Bodies.rectangle(
+                    alien.sprite.x,
+                    alien.sprite.y,
+                    alien.sprite.width,
+                    alien.sprite.height
+                );
+                alien.matterBody = alienBody;
+            }
+        }
+        // Ajoutez les corps Matter.js au moteur Matter.js.
+        Matter.World.add(this.engine.world, this.pool[1].matterBody);
+        for (const row of this.pool[2]) {
+            for (const alien of row) {
+                Matter.World.add(this.engine.world, alien.matterBody);
+            }
+        }
         this.app.ticker.add(this.update.bind(this));
     }
 
@@ -42,28 +70,23 @@ class MainGame {
         document.body.appendChild(this.app.view);
     }
 
-    update() {
-        this.pool[0].increment(10);
-        const player = this.pool[1];
-        if (player instanceof Player) {
-            if (player.hp <= 0) {
-                const index = this.pool.indexOf(player);
-                if (index !== -1) {
-                    this.pool.splice(index, 1);
-                }
-            }
-        }
-        this.pool = this.pool.filter((bullet) => {
-            if (bullet instanceof Bullet) {
-                if (bullet.sprite.y < 0 || bullet.sprite.y > this.size) {
-                    return false; // Ne pas conserver l'élément
-                }
-            }
-            return true; // Conserver l'élément
-        });
-        console.log(this.pool);
-    }
+    setupPhysics() {}
     
+    createMatterBody(obj) {
+        // Créez un corps Matter.js pour un objet Pixi.js
+        const { x, y, width, height } = obj;
+        const body = Matter.Bodies.rectangle(x, y, width, height);
+
+        // Associez l'objet Pixi.js au corps Matter.js
+        obj.matterBody = body;
+
+        // Ajoutez le corps Matter.js au moteur
+        Matter.World.add(this.engine.world, body);
+    }
+
+    update() {
+        Matter.Engine.update(this.engine);
+    }
 }
 
 const game = new MainGame();
