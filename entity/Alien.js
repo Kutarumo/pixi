@@ -60,14 +60,13 @@ class Alien extends Entity {
             return;
         }
         if (
-            !this.pool[2] ||
+            (!this.pool[2] ||
             !this.pool[2][this.coord_tuple[0] + 1] ||
-            this.pool[2][this.coord_tuple[0] + 1][this.coord_tuple[1]] === undefined
+            this.pool[2][this.coord_tuple[0] + 1][this.coord_tuple[1]] === undefined) &&
+            this.generateRandomBoolean(0.2)
         ) {
-            if (this.generateRandomBoolean(0.2)) {
-                this.bullet = new Bullet(this.app, -2, this.SpriteCenterX(), this.SpriteCenterY());
-                this.pool.push(this.bullet);
-            }
+            this.bullet = new Bullet(this.app, -2, this.SpriteCenterX(), this.SpriteCenterY());
+            this.pool.push(this.bullet);
         }
     }
 }
