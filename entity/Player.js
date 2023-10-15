@@ -3,9 +3,10 @@ import { Bullet } from './Bullet.js';
 
 class Player extends Entity {
 
-    constructor(app) {
-        super(app)
+    constructor(app, pool) {
+        super(app);
         this.app = app;
+        this.pool = pool;
         this.sprite = null;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
@@ -56,18 +57,9 @@ class Player extends Entity {
         if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
         else if (event.key == ' ') {
-            this.bullet = new Bullet(this.app);
-            game.pool.push(bullet);
-            this.app.stage.addChild(this.bullet.sprite);
+            this.bullet = new Bullet(this.app, 2);
+            this.pool.push(this.bullet);
         }
-    }
-
-    PlayerCenterX() {
-        return this.sprite.x + (this.sprite.width/2);
-    }
-    
-    PlayerCenterY() {
-        return this.sprite.y + (this.sprite.height/2);
     }
 
     update() {

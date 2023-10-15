@@ -1,6 +1,7 @@
 import { Player } from './entity/Player.js';
 import { Bullet } from './entity/Bullet.js';
 import { Score } from './entity/Score.js'; // Assurez-vous de fournir le bon chemin d'accès au fichier
+import { Alien } from './entity/Alien.js';
 
 class MainGame {
     constructor() {
@@ -9,12 +10,15 @@ class MainGame {
         this.pool = [];
         this.loadGame()
 
-        this.app.ticker.add(this.update.bind(this));
         
-        this.pool.push(new Score(this.app, 0, 0));
-        this.pool.push(new Player(this.app));
+        
+        this.pool.push(new Score(this.app, this.pool, 0, 0));
+        this.pool.push(new Player(this.app, this.pool));
+        this.pool.push(new Alien(this.app, this.pool));
         this.pool[0].saveScore();
         this.pool[0].getScores();
+
+        this.app.ticker.add(this.update.bind(this));
     }
 
     loadGame() {
@@ -32,13 +36,14 @@ class MainGame {
                 }
             }
         }
-        this.pool.forEach((bullet, index) => {
+        this.pool = this.pool.filter((bullet) => {
             if (bullet instanceof Bullet) {
                 if (bullet.sprite.y < 0 || bullet.sprite.y > this.size) {
-                    this.pool.splice(index, 1);
                     this.app.stage.removeChild(bullet.sprite);
+                    return false; // Ne pas conserver l'élément
                 }
             }
+            return true; // Conserver l'élément
         });
     }
 }

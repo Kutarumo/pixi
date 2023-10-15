@@ -2,13 +2,12 @@ import { Entity } from './Entity.js';
 
 class Bullet extends Entity {
 
-    constructor(app) {
-        super(app)
-        this.app = app;
+    constructor(app, speed) {
+        super(app);
         //this.owner = player;
-        this.coord = []
+        this.coord = [250,250]
         this.sprite = null;
-        this.speed = 2;
+        this.speed = speed;
 
         this.loader = new PIXI.Loader();
 
