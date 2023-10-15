@@ -2,18 +2,16 @@ import { Entity } from './Entity.js';
 
 class Bullet extends Entity {
 
-    constructor(app, speed) {
+    constructor(app, speed, x, y) {
         super(app);
         //this.owner = player;
-        this.coord = [250,250]
+        this.coord = [x, y]
         this.sprite = null;
         this.speed = speed;
 
         this.loader = new PIXI.Loader();
 
         this.loader.add('ball', './entity/assets/ball.png').load((loader, resources) => {
-            console.log(resources);
-
             if (resources.ball) {
                 this.createSprite(resources.ball.texture);
                 this.app.ticker.add(this.update.bind(this));
@@ -25,7 +23,7 @@ class Bullet extends Entity {
 
     createSprite(texture) {
         this.sprite = new PIXI.Sprite(texture);
-        this.sprite.scale.set(0.05, 0.05);
+        this.sprite.scale.set(0.02, 0.02);
         this.sprite.x = this.coord[0];
         this.sprite.y = this.coord[1];
         this.app.stage.addChild(this.sprite)

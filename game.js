@@ -10,14 +10,31 @@ class MainGame {
         this.pool = [];
         this.loadGame()
 
-        
-        
         this.pool.push(new Score(this.app, this.pool, 0, 0));
         this.pool.push(new Player(this.app, this.pool));
-        this.pool.push(new Alien(this.app, this.pool));
+    
+        const aliens = [];
+
+        for (let row = 0; row < 5; row++) {
+            const alienRow = [];
+            for (let col = 0; col < 11; col++) {
+                const alien = new Alien(this.app, this.pool, [row, col]);
+                alien.loader.onComplete.add(() => {
+                    const alienWidth = alien.sprite.width;
+                    const alienHeight = alien.sprite.height;
+
+                    alien.sprite.x = col * (alienWidth) + 50;
+                    alien.sprite.y = row * (alienHeight) + 50;
+
+                    alienRow.push(alien);
+                });
+            }
+            aliens.push(alienRow);
+        }
+
+        this.pool.push(aliens);
         this.pool[0].saveScore();
         this.pool[0].getScores();
-
         this.app.ticker.add(this.update.bind(this));
     }
 
@@ -39,13 +56,14 @@ class MainGame {
         this.pool = this.pool.filter((bullet) => {
             if (bullet instanceof Bullet) {
                 if (bullet.sprite.y < 0 || bullet.sprite.y > this.size) {
-                    this.app.stage.removeChild(bullet.sprite);
                     return false; // Ne pas conserver l'élément
                 }
             }
             return true; // Conserver l'élément
         });
+        console.log(this.pool);
     }
+    
 }
 
 const game = new MainGame();

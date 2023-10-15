@@ -14,7 +14,6 @@ class Player extends Entity {
         this.loader = new PIXI.Loader();
     
         this.loader.add('sprite_player', './entity/assets/sprite_player.png').load((loader, resources) => {
-            console.log(resources);
             if (resources.sprite_player) {
                 this.createSprite(resources.sprite_player.texture);                
                 this.setupEventListeners();
@@ -30,7 +29,7 @@ class Player extends Entity {
         this.sprite.x = 250;
         this.sprite.y = 350;
         this.createCollision();
-        this.sprite.scale.set(0.3, 0.3);
+        this.sprite.scale.set(0.1, 0.1);
         this.app.stage.addChild(this.sprite);
     }
 
@@ -57,7 +56,7 @@ class Player extends Entity {
         if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
         else if (event.key == ' ') {
-            this.bullet = new Bullet(this.app, 2);
+            this.bullet = new Bullet(this.app, 2, this.SpriteCenterX(), this.SpriteCenterY());
             this.pool.push(this.bullet);
         }
     }

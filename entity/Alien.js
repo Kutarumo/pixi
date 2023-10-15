@@ -3,14 +3,14 @@ import { Bullet } from './Bullet.js';
 
 class Alien extends Entity {
 
-    constructor(app, pool) {
+    constructor(app, pool, list) {
         super(app);
         this.app = app;
         this.pool = pool;
+        this.coord_tuple = [list[0], list[1]];
         this.loader = new PIXI.Loader();
     
         this.loader.add('sprite_alien', './entity/assets/sprite_player.png').load((loader, resources) => {
-            console.log(resources);
             if (resources.sprite_alien) {
                 this.createSprite(resources.sprite_alien.texture);                
                 this.app.ticker.add(this.update.bind(this));
@@ -22,12 +22,10 @@ class Alien extends Entity {
 
     createSprite(texture) {
         this.sprite = new PIXI.Sprite(texture);
-        this.sprite.x = 250;
-        this.sprite.y = 350;
         this.sprite.anchor.set(0.5);
         this.sprite.rotation = Math.PI;
         this.createCollision();
-        this.sprite.scale.set(0.3, 0.3);
+        this.sprite.scale.set(0.1, 0.1);
         this.app.stage.addChild(this.sprite);
     }
 
@@ -51,16 +49,25 @@ class Alien extends Entity {
     const randomValue = this.getRandom() * 100;
         return randomValue < chancePercentage;
     }
-  
+    
+    areArraysEqual(arr1, arr2) {
+        return JSON.stringify(arr1) === JSON.stringify(arr2);
+    }
 
     update() {
         if (this.hp <= 0) {
             this.destroy();
             return;
         }
-        if (this.generateRandomBoolean(1)){
-            this.bullet = new Bullet(this.app, -2);
-            this.pool.push(this.bullet);
+        if (
+            !this.pool[2] ||
+            !this.pool[2][this.coord_tuple[0] + 1] ||
+            this.pool[2][this.coord_tuple[0] + 1][this.coord_tuple[1]] === undefined
+        ) {
+            if (this.generateRandomBoolean(0.2)) {
+                this.bullet = new Bullet(this.app, -2, this.SpriteCenterX(), this.SpriteCenterY());
+                this.pool.push(this.bullet);
+            }
         }
     }
 }
