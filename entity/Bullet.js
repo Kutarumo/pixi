@@ -2,9 +2,9 @@ import { Entity } from './Entity.js';
 
 class Bullet extends Entity {
 
-    constructor(app, speed, x, y) {
+    constructor(app, pool, speed, x, y) {
         super(app);
-        //this.owner = player;
+        this.pool = pool;
         this.coord = [x, y]
         this.sprite = null;
         this.speed = speed;
@@ -19,6 +19,11 @@ class Bullet extends Entity {
                 console.error("L'image 'ball' n'a pas été chargée correctement.");
             }
         });
+        
+    }
+
+    getCoord() {
+        return [this.sprite.x, this.sprite.y]
     }
 
     createSprite(texture) {
@@ -35,11 +40,17 @@ class Bullet extends Entity {
     }
 
     update() {
-        if (this.hp <= 0) {
-            this.destroy();
+        if (this.hp <= 0 || this.sprite.y < 0) {
+            this.remove();
             return;
         }
         this.sprite.y -= this.speed;
+    }
+
+    remove() {
+        const index = this.pool.indexOf(this);
+        this.pool.splice(index, 1);
+        this.destroy();
     }
 }
 
