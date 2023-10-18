@@ -4,11 +4,10 @@ import { Entity } from './Entity.js';
 
 class Bullet extends Entity {
 
-    constructor(app, owner, pool, speed, x, y) {
-        super(app);
+    constructor(game, owner, speed, coord) {
+        super(game);
         this.owner = owner;
-        this.pool = pool;
-        this.coord = [x, y];
+        this.coord = coord;
         this.sprite = null;
         this.speed = speed;
 
@@ -17,7 +16,7 @@ class Bullet extends Entity {
         this.loader.add('ball', './entity/assets/ball.png').load((loader, resources) => {
             if (resources.ball) {
                 this.createSprite(resources.ball.texture);
-                this.app.ticker.add(this.update.bind(this));
+                this.game.app.ticker.add(this.update.bind(this));
             } else {
                 console.error("L'image 'ball' n'a pas été chargée correctement.");
             }
@@ -30,29 +29,41 @@ class Bullet extends Entity {
         this.sprite.scale.set(0.02, 0.02);
         this.sprite.x = this.coord[0];
         this.sprite.y = this.coord[1];
-        this.app.stage.addChild(this.sprite)
+        this.game.app.stage.addChild(this.sprite)
     }
     
     checkCollisionsWithBullets() {
         const toleranceRadius = 10;
-        const entities = this.pool.filter(entity => entity instanceof Entity)
+        const entities = this.game.pool.filter(entity => entity instanceof Entity);
+        let collisionDetected = false;
         entities.forEach(entity => {
+            if (collisionDetected) return;
             const entityX = entity.coord[0];
             const entityY = entity.coord[1];
             if (
-                entityX >= this.SpriteCenterX() - toleranceRadius &&
-                entityX <= this.SpriteCenterX() + toleranceRadius &&
-                entityY >= this.SpriteCenterY() - toleranceRadius &&
-                entityY <= this.SpriteCenterY() + toleranceRadius
+                entityX >= this.sprite.x - toleranceRadius &&
+                entityX <= this.sprite.x + this.sprite.width + toleranceRadius &&
+                entityY >= this.sprite.y - toleranceRadius &&
+                entityY <= this.sprite.y + this.sprite.height + toleranceRadius
             ) {
-                if (this.owner == "player" && entity.constructor.name instanceof Player) return;
-                if (this.owner == "alien" && entity.constructor.name instanceof Alien) return;
+                if (this.owner == "player" && entity instanceof Player) {
+                    console.log("collision non prise en compte.");
+                } 
+                else if (this.owner == "alien" && entity instanceof Alien) {
+                    console.log("collision non prise en compte.");
+                } 
+                else if (this.owner == "alien" && entity instanceof Bullet && entity.owner == "alien") {
+                    console.log("collision non prise en compte.");
+                } 
+                else if (this.owner == "player" && entity instanceof Bullet && entity.owner == "player") {
+                    console.log("collision non prise en compte.");
+                } 
                 else {
                     console.log("collision entre " + this.constructor.name + " et " + entity.constructor.name + ", bullet tiré par " + this.owner + ".")
-                    this.remove()
+                    this.remove();
                     entity.remove();
+                    collisionDetected = true;
                 }
-                
             }
         });
     }
@@ -60,6 +71,7 @@ class Bullet extends Entity {
     update() {
         this.sprite.y -= this.speed;
         this.checkCollisionsWithBullets();
+        this.coord = [this.SpriteCenterX(), this.SpriteCenterY()];
     }
 }
 

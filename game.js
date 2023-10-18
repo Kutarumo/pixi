@@ -10,12 +10,12 @@ class MainGame {
         this.pool = [];
         this.loadGame()
 
-        this.pool.push(new Score(this.app, this.pool, 0, 0));        
-        this.pool.push(new Player(this.app, this.pool));
+        this.pool.push(new Score(this, [0, 0]));        
+        this.pool.push(new Player(this));
 
         for (let row = 0; row < 5; row++) {
             for (let col = 0; col < 11; col++) {
-                const alien = new Alien(this.app, this.pool, [row, col]);
+                const alien = new Alien(this, [row, col]);
                 alien.loader.onComplete.add(() => {
                     const alienWidth = alien.sprite.width;
                     const alienHeight = alien.sprite.height;
@@ -36,10 +36,17 @@ class MainGame {
     }
 
     update() {
-        const player = this.pool.find(entity => entity instanceof Player);
+        console.log(this.pool.length)
+        const player = this.pool.filter(entity => entity instanceof Player);
         if (player && player.hp <= 0) {
             player.remove();
         }
+        const bullets = this.pool.filter(entity => entity instanceof Bullet);
+        bullets.forEach(bullet => {
+            if (bullet.coord[1] < 0 || bullet.coord[1] > this.size) {
+                bullet.remove();
+            }
+        });
     }
 }
 

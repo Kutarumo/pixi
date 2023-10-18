@@ -3,10 +3,8 @@ import { Bullet } from './Bullet.js';
 
 class Player extends Entity {
 
-    constructor(app, pool) {
-        super(app);
-        this.app = app;
-        this.pool = pool;
+    constructor(game) {
+        super(game);
         this.sprite = null;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
@@ -18,7 +16,7 @@ class Player extends Entity {
             if (resources.sprite_player) {
                 this.createSprite(resources.sprite_player.texture);
                 this.setupEventListeners();
-                this.app.ticker.add(this.update.bind(this));
+                this.game.app.ticker.add(this.update.bind(this));
             } else {
                 console.error("L'image 'sprite_player' n'a pas été chargée correctement.");
             }
@@ -26,12 +24,12 @@ class Player extends Entity {
     }
   
     createSprite(texture) {
-        this.coord = [250, 350]
+        this.coord = [250, 450]
         this.sprite = new PIXI.Sprite(texture);
         this.sprite.x = this.coord[0];
         this.sprite.y = this.coord[1];
         this.sprite.scale.set(0.1, 0.1);
-        this.app.stage.addChild(this.sprite);
+        this.game.app.stage.addChild(this.sprite);
     }
 
     setupEventListeners() {
@@ -48,18 +46,16 @@ class Player extends Entity {
         if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
         else if (event.key == ' ') {
-            const bullets = this.pool.filter(bullet => bullet instanceof Bullet);
+            const bullets = this.game.pool.filter(bullet => bullet instanceof Bullet);
             const player_bullet = bullets.some(bullet => bullet.owner == "player");
             if (!player_bullet) {
                 const bullet = new Bullet(
-                    this.app, 
+                    this.game, 
                     "player",
-                    this.pool,
                     2, 
-                    this.coord[0], 
-                    this.coord[1]
+                    this.coord
                 );
-                this.pool.push(bullet);
+                this.game.pool.push(bullet);
             }
         }
     }
@@ -72,12 +68,11 @@ class Player extends Entity {
             }
         }
         if (this.isRightKeyDown) {
-            if (this.sprite.x + this.sprite.width + playerSpeed <= this.app.renderer.width) {
+            if (this.sprite.x + this.sprite.width + playerSpeed <= this.game.app.renderer.width) {
                 this.sprite.x += playerSpeed;
             }
         }
-        this.coord[0] = this.SpriteCenterX();
-        this.coord[1] = this.SpriteCenterY();
+        this.coord = [this.SpriteCenterX(), this.SpriteCenterY()];
     }
 }
 

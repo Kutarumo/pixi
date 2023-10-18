@@ -1,9 +1,9 @@
 class Entity {
-    constructor(app) {
-        this.app = app;
+    constructor(game) {
+        this.game = game;
         this.hp = 1;
         this.sprites = [];
-        this.coord = []
+        this.coord = [];
     }
 
     SpriteCenterX() {
@@ -28,12 +28,12 @@ class Entity {
     }
     
     remove() {
-        const index = this.pool.indexOf(this);
+        const index = this.game.pool.indexOf(this);
         if (index !== -1) {
-            this.pool.splice(index, 1);
+            this.game.pool.splice(index, 1);
         }
         this.destroy();
-        this.app.stage.removeChild(this.sprite);
+        this.game.app.stage.removeChild(this.sprite);
     }
 }
 

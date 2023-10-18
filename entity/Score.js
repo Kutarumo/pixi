@@ -1,18 +1,17 @@
 import { Entity } from "./Entity.js";
 
 class Score extends Entity {
-    constructor(app, x, y) {
-    super(app);
-    this.app = app;
-    this.coord = [x, y]
-    this.style = new PIXI.TextStyle({
-        fontFamily: 'Arial',
-        fontSize: 36,
-        fill: 'white',
-    });
-    this.text = "Score : ";
-    this.score = 0;
-    this.createText()
+    constructor(game, coord) {
+        super(game);
+        this.coord = coord
+        this.style = new PIXI.TextStyle({
+            fontFamily: 'Arial',
+            fontSize: 36,
+            fill: 'white',
+        });
+        this.text = "Score : ";
+        this.score = 0;
+        this.createText()
     }
 
     saveScore() {
@@ -48,8 +47,8 @@ class Score extends Entity {
         this.textObj = new PIXI.Text(this.text + this.score.toString(), this.style);
         this.textObj.x = this.coord[0];
         this.textObj.y = this.coord[1];
-        this.app.stage.addChild(this.textObj);
-        this.app.ticker.add(this.update.bind(this));
+        this.game.app.stage.addChild(this.textObj);
+        this.game.app.ticker.add(this.update.bind(this));
     }
 
     increment(a){

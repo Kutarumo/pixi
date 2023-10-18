@@ -3,17 +3,15 @@ import { Bullet } from './Bullet.js';
 
 class Alien extends Entity {
 
-    constructor(app, pool, list) {
-        super(app);
-        this.app = app;
-        this.pool = pool;
-        this.coord_tuple = [list[0], list[1]];
+    constructor(game,  list) {
+        super(game);
+        this.coord_tuple = list;
         this.loader = new PIXI.Loader();
     
         this.loader.add('sprite_alien', './entity/assets/sprite_player.png').load((loader, resources) => {
             if (resources.sprite_alien) {
                 this.createSprite(resources.sprite_alien.texture);
-                this.app.ticker.add(this.update.bind(this));
+                this.game.app.ticker.add(this.update.bind(this));
             } else {
                 console.error("L'image 'sprite_alien' n'a pas été chargée correctement.");
             }
@@ -25,7 +23,7 @@ class Alien extends Entity {
         this.sprite.anchor.set(0.5);
         this.sprite.rotation = Math.PI;
         this.sprite.scale.set(0.1, 0.1);
-        this.app.stage.addChild(this.sprite);
+        this.game.app.stage.addChild(this.sprite);
     }
 
     getRandom() {
@@ -41,24 +39,21 @@ class Alien extends Entity {
     }
     
     update() {
-        const aliens = this.pool.filter(entity => entity instanceof Alien);
+        const aliens = this.game.pool.filter(entity => entity instanceof Alien);
         const hasElementWithCoordPlusOne = aliens.some(alien => alien.coord_tuple[0] === this.coord_tuple[0] + 1);
         if (!hasElementWithCoordPlusOne) {
             if (this.generateRandomBoolean(0.05)) {
                 this.bullet = new Bullet(
-                    this.app,
+                    this.game,
                     "alien",
-                    this.pool,
                     -2, 
-                    this.sprite.x, 
-                    this.sprite.y
+                    this.coord
                 );
-                this.pool.push(this.bullet);
+                this.game.pool.push(this.bullet);
             }
         }
         
-        this.coord[0] = this.SpriteCenterX();
-        this.coord[1] = this.SpriteCenterY();
+        this.coord = [this.SpriteCenterX(), this.SpriteCenterY()];
     }
 }
 
