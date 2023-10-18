@@ -1,3 +1,5 @@
+import { Alien } from './Alien.js';
+import { Player } from './Player.js';
 import { Entity } from './Entity.js';
 
 class Bullet extends Entity {
@@ -37,20 +39,20 @@ class Bullet extends Entity {
     }
     
     checkCollisionsWithBullets(list) {
-        const toleranceRadius = 10; // Vous pouvez ajuster cette valeur
+        const toleranceRadius = 10;
         const entities = this.pool.filter(entity => entity instanceof Entity)
         entities.forEach(entity => {
             const entityX = entity.coord[0];
             const entityY = entity.coord[1];
-            // Vérifiez la collision avec la balle
             if (
                 entityX >= this.SpriteCenterX() - toleranceRadius &&
                 entityX <= this.SpriteCenterX() + toleranceRadius &&
                 entityY >= this.SpriteCenterY() - toleranceRadius &&
                 entityY <= this.SpriteCenterY() + toleranceRadius
             ) {
-                // Gérez la collision, par exemple, réduisez la santé du joueur et de la balle
-                console.log("collision")
+                if (this.owner == "player" && entity.constructor.name instanceof Player) return;
+                if (this.owner == "alien" && entity.constructor.name instanceof Alien) return;
+                console.log("collision entre " + this.constructor.name + " et " + entity.constructor.name)
                 this.remove()
                 entity.remove();
             }

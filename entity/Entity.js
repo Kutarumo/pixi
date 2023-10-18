@@ -33,6 +33,7 @@ class Entity {
             this.pool.splice(index, 1);
         }
         this.destroy();
+        this.app.stage.removeChild(this.sprite);
     }
 }
 
