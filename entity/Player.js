@@ -56,8 +56,8 @@ class Player extends Entity {
                     "player",
                     this.pool,
                     2, 
-                    this.SpriteCenterX(), 
-                    this.SpriteCenterY()
+                    this.coord[0], 
+                    this.coord[1]
                 );
                 this.pool.push(bullet);
             }

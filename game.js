@@ -40,21 +40,6 @@ class MainGame {
         if (player && player.hp <= 0) {
             player.remove();
         }
-        const bullets = this.pool.filter(entity => entity instanceof Bullet);
-        bullets.forEach(function(bullet) {
-            if (bullet) {
-                if (bullet.hp <= 0) {
-                    bullet.remove();
-                } else {
-                    // Vérifier si la balle est sortie de l'écran
-                    const screenBounds = this.app.screen;
-                    if (bullet.coord[1] < 0 || bullet.coord[1] > screenBounds.height
-                    ) {
-                        bullet.remove();
-                    }
-                }
-            }
-        }, this);
     }
 }
 

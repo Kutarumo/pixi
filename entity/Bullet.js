@@ -32,13 +32,8 @@ class Bullet extends Entity {
         this.sprite.y = this.coord[1];
         this.app.stage.addChild(this.sprite)
     }
-
-    shootToPlayer(x, y) {
-        this.sprite.x = x;
-        this.sprite.y = y;
-    }
     
-    checkCollisionsWithBullets(list) {
+    checkCollisionsWithBullets() {
         const toleranceRadius = 10;
         const entities = this.pool.filter(entity => entity instanceof Entity)
         entities.forEach(entity => {
@@ -52,9 +47,12 @@ class Bullet extends Entity {
             ) {
                 if (this.owner == "player" && entity.constructor.name instanceof Player) return;
                 if (this.owner == "alien" && entity.constructor.name instanceof Alien) return;
-                console.log("collision entre " + this.constructor.name + " et " + entity.constructor.name)
-                this.remove()
-                entity.remove();
+                else {
+                    console.log("collision entre " + this.constructor.name + " et " + entity.constructor.name + ", bullet tiré par " + this.owner + ".")
+                    this.remove()
+                    entity.remove();
+                }
+                
             }
         });
     }
