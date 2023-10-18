@@ -2,10 +2,11 @@ import { Entity } from './Entity.js';
 
 class Bullet extends Entity {
 
-    constructor(app, pool, speed, x, y) {
+    constructor(app, owner, pool, speed, x, y) {
         super(app);
+        this.owner = owner;
         this.pool = pool;
-        this.coord = [x, y]
+        this.coord = [x, y];
         this.sprite = null;
         this.speed = speed;
 
@@ -22,10 +23,6 @@ class Bullet extends Entity {
         
     }
 
-    getCoord() {
-        return [this.sprite.x, this.sprite.y]
-    }
-
     createSprite(texture) {
         this.sprite = new PIXI.Sprite(texture);
         this.sprite.scale.set(0.02, 0.02);
@@ -38,19 +35,31 @@ class Bullet extends Entity {
         this.sprite.x = x;
         this.sprite.y = y;
     }
-
-    update() {
-        if (this.hp <= 0 || this.sprite.y < 0) {
-            this.remove();
-            return;
-        }
-        this.sprite.y -= this.speed;
+    
+    checkCollisionsWithBullets(list) {
+        const toleranceRadius = 10; // Vous pouvez ajuster cette valeur
+        const entities = this.pool.filter(entity => entity instanceof Entity)
+        entities.forEach(entity => {
+            const entityX = entity.coord[0];
+            const entityY = entity.coord[1];
+            // Vérifiez la collision avec la balle
+            if (
+                entityX >= this.SpriteCenterX() - toleranceRadius &&
+                entityX <= this.SpriteCenterX() + toleranceRadius &&
+                entityY >= this.SpriteCenterY() - toleranceRadius &&
+                entityY <= this.SpriteCenterY() + toleranceRadius
+            ) {
+                // Gérez la collision, par exemple, réduisez la santé du joueur et de la balle
+                console.log("collision")
+                this.remove()
+                entity.remove();
+            }
+        });
     }
 
-    remove() {
-        const index = this.pool.indexOf(this);
-        this.pool.splice(index, 1);
-        this.destroy();
+    update() {
+        this.sprite.y -= this.speed;
+        this.checkCollisionsWithBullets();
     }
 }
 

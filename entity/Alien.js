@@ -41,32 +41,24 @@ class Alien extends Entity {
     }
     
     update() {
-        if (this.hp <= 0) {
-            this.destroy();
-            return;
-        }
-        if (
-            (!this.pool[2] ||
-            !this.pool[2][this.coord_tuple[0] + 1] ||
-            this.pool[2][this.coord_tuple[0] + 1][this.coord_tuple[1]] === undefined)
-        ) {
-            if (this.generateRandomBoolean(0.2)) {
+        const aliens = this.pool.filter(entity => entity instanceof Alien);
+        const hasElementWithCoordPlusOne = aliens.some(alien => alien.coord_tuple[0] === this.coord_tuple[0] + 1);
+        if (!hasElementWithCoordPlusOne) {
+            if (this.generateRandomBoolean(0.05)) {
                 this.bullet = new Bullet(
                     this.app,
+                    "alien",
                     this.pool,
                     -2, 
-                    this.SpriteCenterX(), 
-                    this.SpriteCenterY()
+                    this.sprite.x, 
+                    this.sprite.y
                 );
                 this.pool.push(this.bullet);
             }
         }
-    }
-
-    remove() {
-        const index = this.pool.indexOf(this);
-        this.pool.splice(index, 1);
-        this.destroy();
+        
+        this.coord[0] = this.SpriteCenterX();
+        this.coord[1] = this.SpriteCenterY();
     }
 }
 

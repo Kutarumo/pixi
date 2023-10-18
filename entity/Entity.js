@@ -3,6 +3,7 @@ class Entity {
         this.app = app;
         this.hp = 1;
         this.sprites = [];
+        this.coord = []
     }
 
     SpriteCenterX() {
@@ -23,6 +24,15 @@ class Entity {
         for (const sprite of this.sprites) {
             sprite.destroy();
         }
+        
+    }
+    
+    remove() {
+        const index = this.pool.indexOf(this);
+        if (index !== -1) {
+            this.pool.splice(index, 1);
+        }
+        this.destroy();
     }
 }
 

@@ -13,10 +13,7 @@ class MainGame {
         this.pool.push(new Score(this.app, this.pool, 0, 0));        
         this.pool.push(new Player(this.app, this.pool));
 
-        const aliens = [];
-
         for (let row = 0; row < 5; row++) {
-            const alienRow = [];
             for (let col = 0; col < 11; col++) {
                 const alien = new Alien(this.app, this.pool, [row, col]);
                 alien.loader.onComplete.add(() => {
@@ -26,13 +23,11 @@ class MainGame {
                     alien.sprite.x = col * (alienWidth) + 50;
                     alien.sprite.y = row * (alienHeight) + 50;
 
-                    alienRow.push(alien);
+                    this.pool.push(alien);
                 });
             }
-            aliens.push(alienRow);
         }
 
-        this.pool.push(aliens);
         this.app.ticker.add(this.update.bind(this));
     }
 
@@ -41,16 +36,25 @@ class MainGame {
     }
 
     update() {
-        const player = this.pool[1];
-        if (player instanceof Player && player.hp <= 0 ) {
+        const player = this.pool.find(entity => entity instanceof Player);
+        if (player && player.hp <= 0) {
             player.remove();
         }
-        const bullets = this.pool.filter((entity) => entity instanceof Bullet);
+        const bullets = this.pool.filter(entity => entity instanceof Bullet);
         bullets.forEach(function(bullet) {
-            if (bullet instanceof Bullet && bullet.hp <= 0 ) {
-                bullet.remove();
+            if (bullet) {
+                if (bullet.hp <= 0) {
+                    bullet.remove();
+                } else {
+                    // Vérifier si la balle est sortie de l'écran
+                    const screenBounds = this.app.screen;
+                    if (bullet.coord[1] < 0 || bullet.coord[1] > screenBounds.height
+                    ) {
+                        bullet.remove();
+                    }
+                }
             }
-        });
+        }, this);
     }
 }
 

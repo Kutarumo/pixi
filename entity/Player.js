@@ -10,6 +10,7 @@ class Player extends Entity {
         this.sprite = null;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
+        this.bullet = null;
     
         this.loader = new PIXI.Loader();
     
@@ -25,9 +26,10 @@ class Player extends Entity {
     }
   
     createSprite(texture) {
+        this.coord = [250, 350]
         this.sprite = new PIXI.Sprite(texture);
-        this.sprite.x = 250;
-        this.sprite.y = 350;
+        this.sprite.x = this.coord[0];
+        this.sprite.y = this.coord[1];
         this.sprite.scale.set(0.1, 0.1);
         this.app.stage.addChild(this.sprite);
     }
@@ -46,36 +48,18 @@ class Player extends Entity {
         if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
         else if (event.key == ' ') {
-            this.bullet = new Bullet(
-                this.app, 
-                this.pool,
-                2, 
-                this.SpriteCenterX(), 
-                this.SpriteCenterY()
-            );
-            this.pool.push(this.bullet);
-        }
-    }
-    checkCollisionsWithBullets() {
-        const toleranceRadius = 10; // Vous pouvez ajuster cette valeur
-    
-        // Filtrer les balles dans la pool
-        const bullets = this.pool.filter((entity) => entity instanceof Bullet);
-    
-        for (const bullet of bullets) {
-            let bulletX = bullet.sprite.x;
-            let bulletY = bullet.sprite.y;
-    
-            // Vérifiez la collision avec la balle
-            if (
-                bulletX >= this.sprite.x - toleranceRadius &&
-                bulletX <= this.sprite.x + this.sprite.width + toleranceRadius &&
-                bulletY >= this.sprite.y - toleranceRadius &&
-                bulletY <= this.sprite.y + this.sprite.height + toleranceRadius
-            ) {
-                // Gérez la collision, par exemple, réduisez la santé du joueur et de la balle
-                this.hp -= 1;
-                bullet.hp -= 1;
+            const bullets = this.pool.filter(bullet => bullet instanceof Bullet);
+            const player_bullet = bullets.some(bullet => bullet.owner == "player");
+            if (!player_bullet) {
+                const bullet = new Bullet(
+                    this.app, 
+                    "player",
+                    this.pool,
+                    2, 
+                    this.SpriteCenterX(), 
+                    this.SpriteCenterY()
+                );
+                this.pool.push(bullet);
             }
         }
     }
@@ -92,13 +76,8 @@ class Player extends Entity {
                 this.sprite.x += playerSpeed;
             }
         }
-        this.checkCollisionsWithBullets()
-    }
-
-    remove() {
-        const index = this.pool.indexOf(this);
-        this.pool.splice(index, 1);
-        this.destroy();
+        this.coord[0] = this.SpriteCenterX();
+        this.coord[1] = this.SpriteCenterY();
     }
 }
 
