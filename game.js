@@ -36,11 +36,6 @@ class MainGame {
     }
 
     update() {
-        console.log(this.pool.length)
-        const player = this.pool.filter(entity => entity instanceof Player);
-        if (player && player.hp <= 0) {
-            player.remove();
-        }
         const bullets = this.pool.filter(entity => entity instanceof Bullet);
         bullets.forEach(bullet => {
             if (bullet.coord[1] < 0 || bullet.coord[1] > this.size) {

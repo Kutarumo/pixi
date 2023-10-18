@@ -35,9 +35,9 @@ class Bullet extends Entity {
     checkCollisionsWithBullets() {
         const toleranceRadius = 10;
         const entities = this.game.pool.filter(entity => entity instanceof Entity);
-        let collisionDetected = false;
+        let thisDeleted = false;
         entities.forEach(entity => {
-            if (collisionDetected) return;
+            if (thisDeleted) return;
             const entityX = entity.coord[0];
             const entityY = entity.coord[1];
             if (
@@ -54,7 +54,7 @@ class Bullet extends Entity {
                 } 
                 else if (this.owner == "alien" && entity instanceof Bullet && entity.owner == "alien") {
                     console.log("collision non prise en compte.");
-                } 
+                }
                 else if (this.owner == "player" && entity instanceof Bullet && entity.owner == "player") {
                     console.log("collision non prise en compte.");
                 } 
@@ -62,7 +62,7 @@ class Bullet extends Entity {
                     console.log("collision entre " + this.constructor.name + " et " + entity.constructor.name + ", bullet tiré par " + this.owner + ".")
                     this.remove();
                     entity.remove();
-                    collisionDetected = true;
+                    thisDeleted = true;
                 }
             }
         });

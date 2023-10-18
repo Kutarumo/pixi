@@ -8,7 +8,6 @@ class Player extends Entity {
         this.sprite = null;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
-        this.bullet = null;
     
         this.loader = new PIXI.Loader();
     
@@ -46,8 +45,7 @@ class Player extends Entity {
         if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
         else if (event.key == ' ') {
-            const bullets = this.game.pool.filter(bullet => bullet instanceof Bullet);
-            const player_bullet = bullets.some(bullet => bullet.owner == "player");
+            const player_bullet = this.game.pool.some(bullet => bullet instanceof Bullet && bullet.owner == "player");
             if (!player_bullet) {
                 const bullet = new Bullet(
                     this.game, 
