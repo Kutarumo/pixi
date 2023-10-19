@@ -1,5 +1,3 @@
-import { Alien } from './Alien.js';
-import { Player } from './Player.js';
 import { Entity } from './Entity.js';
 
 class Bullet extends Entity {
@@ -31,47 +29,10 @@ class Bullet extends Entity {
         this.sprite.y = this.coord[1];
         this.game.app.stage.addChild(this.sprite)
     }
-    
-    checkCollisionsWithBullets() {
-        const toleranceRadius = 10;
-        const entities = this.game.pool.filter(entity => entity instanceof Entity);
-        let thisDeleted = false;
-        entities.forEach(entity => {
-            if (thisDeleted) return;
-            const entityX = entity.coord[0];
-            const entityY = entity.coord[1];
-            if (
-                entityX >= this.sprite.x - toleranceRadius &&
-                entityX <= this.sprite.x + this.sprite.width + toleranceRadius &&
-                entityY >= this.sprite.y - toleranceRadius &&
-                entityY <= this.sprite.y + this.sprite.height + toleranceRadius
-            ) {
-                if (this.owner == "player" && entity instanceof Player) {
-                    console.log("collision non prise en compte.");
-                } 
-                else if (this.owner == "alien" && entity instanceof Alien) {
-                    console.log("collision non prise en compte.");
-                } 
-                else if (this.owner == "alien" && entity instanceof Bullet && entity.owner == "alien") {
-                    console.log("collision non prise en compte.");
-                }
-                else if (this.owner == "player" && entity instanceof Bullet && entity.owner == "player") {
-                    console.log("collision non prise en compte.");
-                } 
-                else {
-                    console.log("collision entre " + this.constructor.name + " et " + entity.constructor.name + ", bullet tiré par " + this.owner + ".")
-                    this.remove();
-                    entity.remove();
-                    thisDeleted = true;
-                }
-            }
-        });
-    }
 
     update() {
         this.sprite.y -= this.speed;
-        this.checkCollisionsWithBullets();
-        this.coord = [this.SpriteCenterX(), this.SpriteCenterY()];
+        this.coord = [this.sprite.x, this.sprite.y, this.sprite.width, this.sprite.height];
     }
 }
 

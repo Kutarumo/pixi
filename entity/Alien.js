@@ -42,7 +42,8 @@ class Alien extends Entity {
         const aliens = this.game.pool.filter(entity => entity instanceof Alien);
         const hasElementWithCoordPlusOne = aliens.some(alien => alien.coord_tuple[0] === this.coord_tuple[0] + 1);
         if (!hasElementWithCoordPlusOne) {
-            if (this.generateRandomBoolean(0.05)) {
+            if (this.sprite && this.generateRandomBoolean(0.05)) {
+                console.log("tir de la part de alien " + this.coord_tuple)
                 this.bullet = new Bullet(
                     this.game,
                     "alien",
@@ -52,8 +53,7 @@ class Alien extends Entity {
                 this.game.pool.push(this.bullet);
             }
         }
-        
-        this.coord = [this.SpriteCenterX(), this.SpriteCenterY()];
+        this.coord = [this.sprite.x, this.sprite.y, this.sprite.width, this.sprite.height];
     }
 }
 

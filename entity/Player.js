@@ -8,6 +8,7 @@ class Player extends Entity {
         this.sprite = null;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
+        this.listeners = [];
     
         this.loader = new PIXI.Loader();
     
@@ -32,8 +33,17 @@ class Player extends Entity {
     }
 
     setupEventListeners() {
-        window.addEventListener('keydown', this.handleKeyDown.bind(this));
-        window.addEventListener('keyup', this.handleKeyUp.bind(this));
+        const keydownHandler = (event) => {
+            if (!this.game.pool.some(player => player instanceof Player)) { window.removeEventListener('keydown', keydownHandler); } 
+            else { this.handleKeyDown(event); }
+        };
+        const keyupHandler = (event) => {
+            if (!this.game.pool.some(player => player instanceof Player)) { window.removeEventListener('keyup', keydownHandler); } 
+            else { this.handleKeyUp(event); }
+        };
+        
+        window.addEventListener('keydown', keydownHandler);
+        window.addEventListener('keyup', keyupHandler);
     }
 
     handleKeyDown(event) {
@@ -70,7 +80,7 @@ class Player extends Entity {
                 this.sprite.x += playerSpeed;
             }
         }
-        this.coord = [this.SpriteCenterX(), this.SpriteCenterY()];
+        this.coord = [this.sprite.x, this.sprite.y, this.sprite.width, this.sprite.height];
     }
 }
 

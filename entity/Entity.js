@@ -24,16 +24,17 @@ class Entity {
         for (const sprite of this.sprites) {
             sprite.destroy();
         }
-        
     }
     
     remove() {
+        console.log(this.game.pool)
         const index = this.game.pool.indexOf(this);
         if (index !== -1) {
             this.game.pool.splice(index, 1);
         }
         this.destroy();
         this.game.app.stage.removeChild(this.sprite);
+        console.log(this.game.pool)
     }
 }
 
