@@ -1,7 +1,7 @@
-import { MainGame } from "./game.js";
+import { RetroGame } from "./src/game_mode/retro.js";
 
 
-const game = new MainGame();
+const game = new RetroGame();
 
 function gameLoop() {
     game.update();
