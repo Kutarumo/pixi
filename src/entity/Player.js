@@ -9,6 +9,7 @@ class Player extends LivingEntity {
         this.sprite = this.sprites.player;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
+        this.faction = "player";
         this.setupEventListeners();
         this.addToScreen();
     }
@@ -31,9 +32,10 @@ class Player extends LivingEntity {
     handleKeyUp(event) {
         if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
-        else if (event.key == ' ') { 
-            if (!this.game.pool.some(bullet => bullet.owner == "player")) {
-                this.addPoolEntity(new Bullet(this.game, textures.bullet_player, [...this.coord], undefined, 5, 1, 1, 1, "player", 3));
+        else if (event.key == ' ') {
+            if (!this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.faction === this.faction)) {
+                console.log(this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.faction === this.faction))
+                this.addPoolEntity(new Bullet(this.game, textures.bullet_player, [...this.coord], undefined, 5, 1, 1, 1, this.faction, 3));
             }
         }
     }
@@ -41,6 +43,7 @@ class Player extends LivingEntity {
     update() {
         if (this.hp <= 0) {
             this.remove();
+            return;
         }
         const playerSpeed = 3;
         if (this.isLeftKeyDown) {

@@ -18,17 +18,19 @@ class RetroGame {
             this.pool.push(new Alien(this, textures.alien_3, [row * 50 + 100, 4 * 50 + 100], 3, undefined, 1, 1, [0, 4]));
         }
         this.pool.push(new Player(this, textures.player, [250, 550], 3, undefined, 3, 3));
-        // this.pool.push(new Alien(this, textures.alien_3, [0 * 50 + 100, 4 * 50 + 100], 3, undefined, 3, 3, [0, 4]));
         
         
-        this.app.ticker.add(this.update());
+        this.app.ticker.add(() => { this.update(this.app.ticker.deltaMS) });
     }
 
     loadGame() {
         document.body.appendChild(this.app.view);
     }
 
-    update() {
+    update(delta) {
+        for (const entity of this.pool) {
+            entity.update(delta);
+        }
     }
 }
 

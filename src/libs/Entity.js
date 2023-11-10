@@ -11,7 +11,6 @@ class Entity {
         this.loader = new PIXI.Loader();
 
         this.addTextures(textures);
-        this.game.app.ticker.add(this.update.bind(this));
     }
 
     addToScreen() {
@@ -61,7 +60,7 @@ class Entity {
         if (index !== -1) {
             this.game.pool.splice(index, 1);
         }
-        delete this.sprites;
+        this.sprites = {};
     }
 
     update_position() {

@@ -5,13 +5,21 @@ import { Player } from "./Player.js";
 
 class Bullet extends LivingEntity {
 
-    constructor(game, textures, coord, scale, rotation, max_hp, hp, force, owner, speed) {
+    constructor(game, textures, coord, scale, rotation, max_hp, hp, force, faction, speed) {
         super(game, textures, coord, rotation, scale, max_hp, hp, force);
-        this.sprite.texture = this.sprites.bullet.texture;
-        this.owner = owner;
+        this.attributeSprite();
+        this.faction = faction;
         this.coord = coord;
         this.speed = speed;
         this.addToScreen();
+    }
+
+    attributeSprite() {
+        if (this.faction = "player") {
+            this.sprite.texture = this.sprites.bullet.texture;
+        } else {
+            this.sprite.texture = this.sprites.bullet_1.texture;
+        }
     }
 
     overlapsWith(otherEntity) {
@@ -36,15 +44,14 @@ class Bullet extends LivingEntity {
     update() {
         if (this.hp <= 0 || this.coord[1] < 0 || this.coord[1] > this.game.size) {
             this.remove();
+            return;
         }
         const entities = this.game.pool.filter(entity => entity instanceof Entity);
         for (const entity of entities) {
             if 
             (
                 this.overlapsWith(entity)  &&
-                // entity instanceof Bullet && this.owner !== entity.owner &&
-                entity instanceof Player && this.owner !== "player" 
-                // entity instanceof Alien && this.owner !== "alien"
+                this.faction !== entity.faction
             ) {
                 console.log("collision");
                 this.damage(1);
