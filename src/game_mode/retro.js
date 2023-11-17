@@ -11,14 +11,14 @@ class RetroGame {
         this.pool = [];
         this.loadGame();
 
-        //this.pool.push(new Alien(this, textures.alien_1, [5 * 50 + 100, 0 * 50 + 100], 3, undefined, 1, 1, [5, 0], "alien", 2));
+        this.pool.push(new Alien(this, textures.alien_1, [5 * 50 + 100, 0 * 50 + 100], 3, undefined, 1, 1, [5, 0], "alien", 2));
         // game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat = false
         this.pool.push(new Player(this, [200,200], 3, 3, 1, 3, textures["player"], 3, "player", 2, 0));
         console.log(this.pool);
 
         //this.pool.push(new Test(this));
         
-        // this.app.ticker.add(() => { this.update(this.app.ticker.deltaMS) });
+        this.app.ticker.add(() => { this.update(this.app.ticker.deltaMS) });
     }
 
     loadGame() {
