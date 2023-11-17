@@ -29,8 +29,12 @@ class Alien extends LivingEntity {
             this.changeSprite("alien_" + this.currentFrame);
             // this.coord[0] += 10;
         }
-        if (generateRandomBoolean(0.1)) {
-            this.addPoolEntity(new Bullet(this.game, textures.bullet_1, [...this.coord], undefined, 5, 1, 1, 1, this.faction, -3));
+        const alien = this.game.pool.filter(alien => alien instanceof Alien).some(alien => this.coord_tuple[0] === alien.coord_tuple[0] && this.coord_tuple[1]+1 === alien.coord_tuple[1]);
+
+        if (!alien) {
+            if (generateRandomBoolean(0.5)) {
+                this.addPoolEntity(new Bullet(this.game, textures.bullet_1, [...this.coord], undefined, 5, 1, 1, 1, this.faction, -3));
+            }
         }
         this.update_position();
     }

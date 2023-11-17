@@ -7,19 +7,11 @@ class Bullet extends LivingEntity {
 
     constructor(game, textures, coord, scale, rotation, max_hp, hp, force, faction, speed) {
         super(game, textures, coord, rotation, scale, max_hp, hp, force);
-        this.attributeSprite();
         this.faction = faction;
+        this.sprite = this.sprites.bullet_1;
         this.coord = coord;
         this.speed = speed;
         this.addToScreen();
-    }
-
-    attributeSprite() {
-        if (this.faction = "player") {
-            this.sprite.texture = this.sprites.bullet.texture;
-        } else {
-            this.sprite.texture = this.sprites.bullet_1.texture;
-        }
     }
 
     overlapsWith(otherEntity) {
@@ -41,8 +33,10 @@ class Bullet extends LivingEntity {
         return overlap;
     }
     
-    update() {
+    update(delta) {
+        this.delta = delta;
         if (this.hp <= 0 || this.coord[1] < 0 || this.coord[1] > this.game.size) {
+            this.changeSprite("death");
             this.remove();
             return;
         }
@@ -53,7 +47,6 @@ class Bullet extends LivingEntity {
                 this.overlapsWith(entity)  &&
                 this.faction !== entity.faction
             ) {
-                console.log("collision");
                 this.damage(1);
                 entity.damage(1);
                 return;

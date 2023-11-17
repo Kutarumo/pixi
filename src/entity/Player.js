@@ -45,7 +45,7 @@ class Player extends LivingEntity {
             this.remove();
             return;
         }
-        const playerSpeed = 3;
+        const playerSpeed = 7;
         if (this.isLeftKeyDown) {
             if (this.coord[0] - playerSpeed >= 0) {
                 this.coord[0] -= playerSpeed;

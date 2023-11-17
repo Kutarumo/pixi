@@ -119,8 +119,8 @@ const textures = {
         "death": texture_loader.createNewTexture(file.texture_coord.death_bullet_alien)
     },
     "bullet_player": {
-        "bullet": texture_loader.createNewTexture(file.texture_coord.player.bullet),
-        "bullet_death": texture_loader.createNewTexture(file.texture_coord.death_bullet_player)
+        "bullet_1": texture_loader.createNewTexture(file.texture_coord.player.bullet),
+        "death": texture_loader.createNewTexture(file.texture_coord.death_bullet_player)
     }
 };
 
