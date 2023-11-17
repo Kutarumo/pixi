@@ -1,12 +1,12 @@
 import { Entity } from "../libs/Entity.js";
-import { LivingEntity } from "../libs/LivingEntity.js";
+import { Animation } from "../libs/Animation.js";
 import { Alien } from "./Alien.js";
 import { Player } from "./Player.js";
 
-class Bullet extends LivingEntity {
+class Bullet extends Animation {
 
-    constructor(game, textures, coord, scale, rotation, max_hp, hp, force, faction, speed) {
-        super(game, textures, coord, rotation, scale, max_hp, hp, force);
+    constructor(game, textures, coord, scale, rotation, max_hp, hp, force, faction, speed, state, nbTexture) {
+        super(game, textures, coord, rotation, scale, max_hp, hp, force, state, nbTexture);
         this.faction = faction;
         this.sprite = this.sprites.bullet_1;
         this.coord = coord;
@@ -48,7 +48,9 @@ class Bullet extends LivingEntity {
                 this.faction !== entity.faction
             ) {
                 this.damage(1);
+                this.changeSprite('death_1');
                 entity.damage(1);
+                entity.changeSprite('death_1');
                 return;
             }
         }

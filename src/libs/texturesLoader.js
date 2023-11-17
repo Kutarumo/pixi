@@ -74,53 +74,53 @@ const texture_loader = new TextureLoader(file.file_path);
 
 const textures = {
     "player": {
-        "player": texture_loader.createNewTexture(file.texture_coord.player.player),
+        "player_1": texture_loader.createNewTexture(file.texture_coord.player.player),
         "death_1": texture_loader.createNewTexture(file.texture_coord.player.death_1),
         "death_2": texture_loader.createNewTexture(file.texture_coord.player.death_2),
     },
     "alien_1": {
         "alien_1": texture_loader.createNewTexture(file.texture_coord.alien_1.alien["1"]),
         "alien_2": texture_loader.createNewTexture(file.texture_coord.alien_1.alien["2"]),
-        "death": texture_loader.createNewTexture(file.texture_coord.alien_death),
+        "death_1": texture_loader.createNewTexture(file.texture_coord.alien_death),
     },
     "alien_2": {
         "alien_1": texture_loader.createNewTexture(file.texture_coord.alien_2.alien["1"]),
         "alien_2": texture_loader.createNewTexture(file.texture_coord.alien_2.alien["2"]),
-        "death": texture_loader.createNewTexture(file.texture_coord.alien_death),
+        "death_1": texture_loader.createNewTexture(file.texture_coord.alien_death),
     },
     "alien_3": {
         "alien_1": texture_loader.createNewTexture(file.texture_coord.alien_3.alien["1"]),
         "alien_2": texture_loader.createNewTexture(file.texture_coord.alien_3.alien["2"]),
-        "death": texture_loader.createNewTexture(file.texture_coord.alien_death),
+        "death_1": texture_loader.createNewTexture(file.texture_coord.alien_death),
     },
     "bonus": {
         "bonus": texture_loader.createNewTexture(file.texture_coord.bonus["1"]),
-        "death": texture_loader.createNewTexture(file.texture_coord.bonus.death)
+        "death_1": texture_loader.createNewTexture(file.texture_coord.bonus.death)
     },
     "bullet_1": {
         "bullet_1": texture_loader.createNewTexture(file.texture_coord.alien_1.bullet["1"]),
         "bullet_2": texture_loader.createNewTexture(file.texture_coord.alien_1.bullet["2"]),
         "bullet_3": texture_loader.createNewTexture(file.texture_coord.alien_1.bullet["3"]),
         "bullet_4": texture_loader.createNewTexture(file.texture_coord.alien_1.bullet["4"]),
-        "death": texture_loader.createNewTexture(file.texture_coord.death_bullet_alien)
+        "death_1": texture_loader.createNewTexture(file.texture_coord.death_bullet_alien)
     },
     "bullet_2": {
         "bullet_1": texture_loader.createNewTexture(file.texture_coord.alien_2.bullet["1"]),
         "bullet_2": texture_loader.createNewTexture(file.texture_coord.alien_2.bullet["2"]),
         "bullet_3": texture_loader.createNewTexture(file.texture_coord.alien_2.bullet["3"]),
         "bullet_4": texture_loader.createNewTexture(file.texture_coord.alien_2.bullet["4"]),
-        "death": texture_loader.createNewTexture(file.texture_coord.death_bullet_alien)
+        "death_1": texture_loader.createNewTexture(file.texture_coord.death_bullet_alien)
     },
     "bullet_3": {
         "bullet_1": texture_loader.createNewTexture(file.texture_coord.alien_2.bullet["1"]),
         "bullet_2": texture_loader.createNewTexture(file.texture_coord.alien_2.bullet["2"]),
         "bullet_3": texture_loader.createNewTexture(file.texture_coord.alien_2.bullet["3"]),
         "bullet_4": texture_loader.createNewTexture(file.texture_coord.alien_2.bullet["4"]),
-        "death": texture_loader.createNewTexture(file.texture_coord.death_bullet_alien)
+        "death_1": texture_loader.createNewTexture(file.texture_coord.death_bullet_alien)
     },
     "bullet_player": {
         "bullet_1": texture_loader.createNewTexture(file.texture_coord.player.bullet),
-        "death": texture_loader.createNewTexture(file.texture_coord.death_bullet_player)
+        "death_1": texture_loader.createNewTexture(file.texture_coord.death_bullet_player)
     }
 };
 

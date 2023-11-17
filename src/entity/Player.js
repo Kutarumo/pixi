@@ -1,17 +1,15 @@
-import { LivingEntity } from "../libs/LivingEntity.js";
-import { textures } from "../libs/texturesLoader.js";
+import { Animation } from "../libs/Animation.js";
 import { Bullet } from './Bullet.js';
 
-class Player extends LivingEntity {
+class Player extends Animation {
 
-    constructor(game, textures, coord, scale, rotation, max_hp, hp) {
-        super(game, textures, coord, scale, rotation, max_hp, hp);
-        this.sprite = this.sprites.player;
+    constructor(game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat) {
+        super(game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat);
+        this.game = game;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
-        this.faction = "player";
+        this.faction = state;
         this.setupEventListeners();
-        this.addToScreen();
     }
 
     setupEventListeners() {
@@ -45,15 +43,14 @@ class Player extends LivingEntity {
             this.remove();
             return;
         }
-        const playerSpeed = 7;
         if (this.isLeftKeyDown) {
-            if (this.coord[0] - playerSpeed >= 0) {
-                this.coord[0] -= playerSpeed;
+            if (this.coord[0] - this.speed >= 0) {
+                this.coord[0] -= this.speed;
             }
         }
         if (this.isRightKeyDown) {
-            if (this.coord[0] + this.sprite.width + playerSpeed <= this.game.app.renderer.width) {
-                this.coord[0] += playerSpeed;
+            if (this.coord[0] + this.sprite.width + this.speed <= this.game.app.renderer.width) {
+                this.coord[0] += this.speed;
             }
         }
         this.update_position()
