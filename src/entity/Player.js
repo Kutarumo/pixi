@@ -32,8 +32,8 @@ class Player extends Animation {
         if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
         else if (event.key == ' ') {
-            if (!this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.faction === this.faction)) {
-                this.addPoolEntity(new Bullet(this.game, [...this.coord], 1, 1, 1, 3, textures.bullet_player, 200, "bullet", 2, 0, this.faction));
+            if (!this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.owner === this.owner)) {
+                this.addPoolEntity(new Bullet(this.game, [...this.coord], 1, 1, 1, 3, textures.bullet_player, 200, "bullet", 3, 0, this.owner));
             }
         }
     }

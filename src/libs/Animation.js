@@ -17,12 +17,6 @@ class Animation extends LivingEntity{
         this.addToScreen();
     }
 
-    animation() {
-        if (this.state == "death") {
-            this.changeSprite(this.state+"_1");
-        }
-    }
-
     changeSprite(sprite) {
         this.sprite.texture = this.sprites[sprite];
     }

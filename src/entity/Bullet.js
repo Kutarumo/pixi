@@ -32,7 +32,7 @@ class Bullet extends Animation {
     update(delta) {
         this.delta = delta;
         if (this.hp <= 0 || this.coord[1] < 0 || this.coord[1] > this.game.size) {
-            this.changeSprite("death");
+            this.changeSprite("death_1");
             this.remove();
             return;
         }
@@ -40,13 +40,12 @@ class Bullet extends Animation {
         for (const entity of entities) {
             if 
             (
-                this.overlapsWith(entity)  &&
+                this.overlapsWith(entity) &&
                 this.owner !== entity.owner
             ) {
+                console.log(this.owner + "  " + entity.owner)
                 this.damage(1);
-                this.state = "death";
                 entity.damage(1);
-                entity.state = "death";
                 return;
             }
         }
