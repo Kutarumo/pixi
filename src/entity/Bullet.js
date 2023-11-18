@@ -4,14 +4,10 @@ import { Alien } from "./Alien.js";
 import { Player } from "./Player.js";
 
 class Bullet extends Animation {
-
-    constructor(game, textures, coord, scale, rotation, max_hp, hp, force, faction, speed, state, nbTexture) {
-        super(game, textures, coord, rotation, scale, max_hp, hp, force, state, nbTexture);
-        this.faction = faction;
-        this.sprite = this.sprites.bullet_1;
-        this.coord = coord;
-        this.speed = speed;
-        this.addToScreen();
+    // game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat = false
+    constructor(game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, owner, repeat) {
+        super(game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat);
+        this.owner = owner;
     }
 
     overlapsWith(otherEntity) {
@@ -45,12 +41,12 @@ class Bullet extends Animation {
             if 
             (
                 this.overlapsWith(entity)  &&
-                this.faction !== entity.faction
+                this.owner !== entity.owner
             ) {
                 this.damage(1);
-                this.changeSprite('death_1');
+                this.state = "death";
                 entity.damage(1);
-                entity.changeSprite('death_1');
+                entity.state = "death";
                 return;
             }
         }

@@ -11,7 +11,7 @@ class Alien extends Animation {
         this.currentFrame = 1;
         this.delta = 0;
         this.speed = 1000;
-        this.faction = "alien";
+        this.owner = "alien";
     }
 
     update() {

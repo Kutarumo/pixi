@@ -1,5 +1,4 @@
 import { Player } from '../entity/Player.js';
-import { Test } from '../entity/Test.js';
 import { Score } from '../ui/Score.js';
 import { Alien } from '../entity/Alien.js';
 import { textures } from '../libs/texturesLoader.js';
@@ -13,7 +12,7 @@ class RetroGame {
 
         this.pool.push(new Alien(this, textures.alien_1, [5 * 50 + 100, 0 * 50 + 100], 3, undefined, 1, 1, [5, 0], "alien", 2));
         // game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat = false
-        this.pool.push(new Player(this, [200,200], 3, 3, 1, 3, textures["player"], 3, "player", 2, 0));
+        this.pool.push(new Player(this, [400,600], 3, 3, 1, 3, textures["player"], 3, "player", 2, 0));
         console.log(this.pool);
 
         //this.pool.push(new Test(this));

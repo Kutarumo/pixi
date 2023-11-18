@@ -1,4 +1,5 @@
 import { Animation } from "../libs/Animation.js";
+import { textures } from '../libs/texturesLoader.js';
 import { Bullet } from './Bullet.js';
 
 class Player extends Animation {
@@ -8,7 +9,7 @@ class Player extends Animation {
         this.game = game;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
-        this.faction = state;
+        this.owner = state;
         this.setupEventListeners();
     }
 
@@ -32,8 +33,7 @@ class Player extends Animation {
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
         else if (event.key == ' ') {
             if (!this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.faction === this.faction)) {
-                console.log(this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.faction === this.faction))
-                this.addPoolEntity(new Bullet(this.game, textures.bullet_player, [...this.coord], undefined, 5, 1, 1, 1, this.faction, 3));
+                this.addPoolEntity(new Bullet(this.game, [...this.coord], 1, 1, 1, 3, textures.bullet_player, 200, "bullet", 2, 0, this.faction));
             }
         }
     }
