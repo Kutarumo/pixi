@@ -1,9 +1,9 @@
+import { LivingEntity } from "../libs/LivingEntity.js";
 import { Entity } from "../libs/Entity.js";
-import { Animation } from "../libs/Animation.js";
 import { Alien } from "./Alien.js";
 import { Player } from "./Player.js";
 
-class Bullet extends Animation {
+class Bullet extends LivingEntity {
     // game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat = false
     constructor(game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, owner, repeat) {
         super(game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat);
@@ -32,7 +32,6 @@ class Bullet extends Animation {
     update(delta) {
         this.delta = delta;
         if (this.hp <= 0 || this.coord[1] < 0 || this.coord[1] > this.game.size) {
-            this.changeSprite("death_1");
             this.remove();
             return;
         }
@@ -43,9 +42,10 @@ class Bullet extends Animation {
                 this.overlapsWith(entity) &&
                 this.owner !== entity.owner
             ) {
-                console.log(this.owner + "  " + entity.owner)
+                if (entity instanceof Player) {
+                    entity.isHit = true;
+                }
                 this.damage(1);
-                entity.damage(1);
                 return;
             }
         }

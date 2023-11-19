@@ -1,10 +1,10 @@
 import { extractFileName } from './Utils.js';
 
 class Entity {
-    constructor(game, coord) {
+    constructor(game, coord, sprites, scale, rotation) {
         this.game = game;
         this.coord = coord;
-        this.sprite = new PIXI.Sprite();
+        this.sprite = new PIXI.AnimatedSprite(sprites);
     }
 
     addToScreen() {
@@ -37,7 +37,9 @@ class Entity {
         this.sprite.y = this.coord[1];
     }
 
-    update() {}
+    update() {
+        this.update_position();
+    }
 }
 
 export { Entity };
