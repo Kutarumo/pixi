@@ -4,15 +4,20 @@ import { generateRandomBoolean } from "../libs/Utils.js";
 import { TexturesLoader } from "../libs/texturesLoader.js";
 
 class Alien extends LivingEntity {
-    constructor(game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, coord_tuple, repeat) {
-        super(game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat);
+    constructor(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple) {
+        super(game, coord, hp, max_hp, force, speed, sprites, scale, rotation);
         this.coord_tuple = coord_tuple;
         this.owner = state;
-        this.sprite. animationSpeed = 0.01;
+        this.sprite.animationSpeed = 0.01;
+        this.sprite.anchor.set(0.5);
 
         // Play the animation and Add sprite to screen
         this.sprite.play();
         this.addToScreen();
+    }
+
+    addToScreen() {
+        this.game.graphics.addChild(this.sprite);
     }
 
     update() {

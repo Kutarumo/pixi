@@ -5,6 +5,8 @@ class Entity {
         this.game = game;
         this.coord = coord;
         this.sprite = new PIXI.AnimatedSprite(sprites);
+        this.sprite.scale.set(scale);
+        this.sprite.rotation = rotation;
     }
 
     addToScreen() {

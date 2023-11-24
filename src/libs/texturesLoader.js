@@ -2,6 +2,7 @@ class TexturesLoader {
     constructor() {
         this.textures = [[[],[],[],[]],[],[[],[],[],[]]];
         this.BASE_PATH = './src/publics/';
+        this.path_floder = ['alien', 'player', 'bullet'];
 
         this.loadAliens();
         this.loadPlayer();
