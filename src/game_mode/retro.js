@@ -1,24 +1,18 @@
 import { Player } from '../entity/Player.js';
 import { Score } from '../ui/Score.js';
+import { GameMenu } from '../ui/game_menu.js';
 import { Alien } from '../entity/Alien.js';
 import { TexturesLoader } from '../libs/texturesLoader.js';
+import { Base } from './base.js';
 
-class RetroGame {
-    constructor() {
-        this.size = 800;
-        this.app = new PIXI.Application({ width: this.size, height: this.size });
+class RetroGame extends Base{
+    constructor(size) {
+        super(size)
         this.graphics = new PIXI.Graphics();
         this.step = 10;
         this.delta = 0;
         this.texturesLoader = new TexturesLoader();
-        this.pool = [];
         this.loadGame();
-        this.app.ticker.add(() => { this.update(this.app.ticker.deltaMS) });
-    }
-
-    loadGame() {
-        document.body.appendChild(this.app.view);
-        this.loadEntities();
     }
 
     loadEntities() {
@@ -31,7 +25,7 @@ class RetroGame {
             this.pool.push(new Alien(this, [row * 50 + 100, 4 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][2], "alien_2", 3, 0, [row, 4]));
         }
         // this.pool.push(new Player(this, [400,600], 3, 3, 1, 3, textures.player, 3, "player", 3, 0));
-
+        this.menu = new GameMenu(this, 800);
         // Définition des propriétés du rectangle
         const rectWidth = 550;
         const rectHeight = 250;
@@ -61,9 +55,7 @@ class RetroGame {
         this.delta += delta;
         this.alienMove();
         
-        for (const entity of this.pool) {
-            entity.update(delta);
-        }
+        super.update();
     }
 }
 

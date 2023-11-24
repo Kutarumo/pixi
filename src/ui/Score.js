@@ -1,5 +1,6 @@
 class Score {
     constructor(game, coord) {
+        this.game = game;
         this.coord = coord
         this.style = new PIXI.TextStyle({
             fontFamily: 'Arial',
@@ -8,15 +9,17 @@ class Score {
         });
         this.text = "Score : ";
         this.score = 0;
-        this.createText()
+        this.createText();
     }
 
     createText() {
         this.textObj = new PIXI.Text(this.text + this.score.toString(), this.style);
         this.textObj.x = this.coord[0];
         this.textObj.y = this.coord[1];
-        this.game.app.stage.addChild(this.textObj);
-        this.game.app.ticker.add(this.update.bind(this));
+    }
+
+    addToScreen() {
+        this.game.menu.graphics.addChild(this.textObj);
     }
 
     increment(a){
