@@ -5,8 +5,8 @@ import { Player } from "./Player.js";
 
 class Bullet extends LivingEntity {
     // game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat = false
-    constructor(game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, owner, repeat) {
-        super(game, coord, hp, max_hp, force, speed, sprites, animation_rate, state, scale, rotation, repeat);
+    constructor(game, coord, hp, max_hp, force, speed, sprites, scale, rotation, owner) {
+        super(game, coord, hp, max_hp, force, speed, sprites, scale, rotation);
         this.owner = owner;
     }
 

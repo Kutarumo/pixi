@@ -6,7 +6,6 @@ class Player extends LivingEntity {
 
     constructor(game, coord, hp, max_hp, force, speed, sprites, scale, rotation) {
         super(game, coord, hp, max_hp, force, speed, sprites, scale, rotation);
-        this.game = game;
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
         this.owner = state;

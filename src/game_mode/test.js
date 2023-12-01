@@ -1,3 +1,4 @@
+import { Wall } from "../entity/Wall.js";
 import { Base } from "./base.js";
 
 
@@ -13,15 +14,7 @@ class TestGame extends Base{
     }
 
     wall_params() {
-        this.wall.beginFill(0xFF0000, 0.5);
-        this.wall.drawRect(0, 0, this.size/8, this.size/8);
-        this.wall.endFill();
-
-        this.textures = PIXI.Texture.WHITE;
-        this.wall_sprite
-
-
-        this.app.stage.addChild(this.wall);
+        this.wall = new Wall(this, [0, 0]);
     }
 
     update(delta) {
