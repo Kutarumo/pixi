@@ -22,8 +22,8 @@ class Wall {
             [1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
         ]
         this.wall = new PIXI.Graphics();
-        this.wall.beginFill(0xFF0000, 0.5);
-        this.wall.drawRect(0,0,250,200);
+        this.wall.beginFill(0xFF0000, 0     );
+        this.wall.drawRect(0,0,125,100);
         this.wall.endFill();
         this.create_wall();
         this.addToScreen();
