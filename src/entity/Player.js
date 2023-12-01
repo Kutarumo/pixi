@@ -8,7 +8,7 @@ class Player extends LivingEntity {
         super(game, coord, hp, max_hp, force, speed, sprites, scale, rotation);
         this.isLeftKeyDown = false;
         this.isRightKeyDown = false;
-        this.owner = state;
+        this.owner = "player";
         this.isHit = false;
         this.hitTime = 0;
         this.setupEventListeners();
@@ -38,11 +38,12 @@ class Player extends LivingEntity {
     handleKeyUp(event) {
         if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
-        // else if (event.key == ' ') {
-        //     if (!this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.owner === this.owner)) {
-        //         this.addPoolEntity(new Bullet(this.game, [...this.coord], 1, 1, 1, 3, textures.bullet_player, 200, "bullet", 3, 0, this.owner));
-        //     }
-        // }
+        else if (event.key == ' ') {
+            if (!this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.owner === this.owner)) {
+                                                //game, coord, hp, max_hp, force, speed, sprites, scale, rotation, owner
+                this.addPoolEntity(new Bullet(this.game, [...this.coord], 1, 1, 1, 3, this.game.texturesLoader.textures[2][0], 3, 0, this.owner));
+            }
+        }
     }
 
     movement() {

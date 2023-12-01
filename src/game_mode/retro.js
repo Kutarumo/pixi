@@ -4,15 +4,16 @@ import { GameMenu } from '../ui/game_menu.js';
 import { Alien } from '../entity/Alien.js';
 import { TexturesLoader } from '../libs/texturesLoader.js';
 import { Base } from './base.js';
-
-class RetroGame extends Base{
+import { Boss } from '../entity/Boss.js';
+class RetroGame extends Base {
     constructor(size) {
-        super(size)
+        super(size);
         this.graphics = new PIXI.Graphics();
         this.step = 10;
         this.delta = 0;
         this.texturesLoader = new TexturesLoader();
-        this.loadGame();
+        this.loadEntities();
+        console.log(this.texturesLoader.textures[2][0]);
     }
 
     loadEntities() {
@@ -24,8 +25,9 @@ class RetroGame extends Base{
             this.pool.push(new Alien(this, [row * 50 + 100, 3 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_1", 3, 0, [row, 3]));
             this.pool.push(new Alien(this, [row * 50 + 100, 4 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][2], "alien_2", 3, 0, [row, 4]));
         }
-        // this.pool.push(new Player(this, [400,600], 3, 3, 1, 3, textures.player, 3, "player", 3, 0));
-        this.menu = new GameMenu(this, 800);
+            //game, coord, hp, max_hp, force, speed, sprites, scale, rotation
+        this.pool.push(new Player(this, [400,600], 3, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
+
         // Définition des propriétés du rectangle
         const rectWidth = 550;
         const rectHeight = 250;
@@ -57,6 +59,7 @@ class RetroGame extends Base{
         
         super.update();
     }
+
 }
 
 export { RetroGame };

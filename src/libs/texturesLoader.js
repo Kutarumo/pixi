@@ -6,6 +6,7 @@ class TexturesLoader {
 
         this.loadAliens();
         this.loadPlayer();
+        this.loadBullets();
     }
 
     loadAliens() {
@@ -18,8 +19,12 @@ class TexturesLoader {
     }
 
     loadPlayer() {
-
+            this.textures[1].push(PIXI.Texture.from(this.BASE_PATH+"player/Player.png")); 
+            
+        }
+    loadBullets(){
+        this.textures[2][0].push(PIXI.Texture.from(this.BASE_PATH+"sprites/tir/1-1.png")); 
     }
-}
-
+    }
+ 
 export { TexturesLoader };

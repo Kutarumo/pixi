@@ -3,7 +3,7 @@ import { Bullet } from './Bullet.js';
 import { generateRandomBoolean } from "../libs/Utils.js";
 import { TexturesLoader } from "../libs/texturesLoader.js";
 
-class Alien extends LivingEntity {
+class Boss extends LivingEntity {
     constructor(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple) {
         super(game, coord, hp, max_hp, force, speed, sprites, scale, rotation);
         this.coord_tuple = coord_tuple;
@@ -20,19 +20,21 @@ class Alien extends LivingEntity {
         this.game.graphics.addChild(this.sprite);
     }
     remove(){
-        this.game.graphics.removeChild(this.sprite);
-        this.removePoolEntity(this);
-        this.sprites = {};
+        super.remove();
     }
     update() {
-        const alien = this.game.pool.filter(alien => alien instanceof Alien).some(alien => this.coord_tuple[0] === alien.coord_tuple[0] && this.coord_tuple[1]+1 === alien.coord_tuple[1]);
-        if (!alien) {
-            if (generateRandomBoolean(0.5)) {
-                this.addPoolEntity(new Bullet(this.game, [...this.coord], 1, 1, 1, -3, this.game.texturesLoader.textures[2][0], 3, 0, this.owner));
-            }
+        // If alien reaches the left edge of the screen, set its x-coordinate to the right edge
+        if (this.coord_tuple[0] - this.sprite.width < 0) {
+            this.coord_tuple[0] = this.game.screen.width;
         }
+    
+        // If alien reaches the right edge of the screen, set its x-coordinate to the left edge
+        if (this.coord_tuple[0] + this.sprite.width > this.game.screen.width) {
+            this.coord_tuple[0] = 0 - this.sprite.width;
+        }
+    
         this.update_position();
     }
 }
 
-export { Alien };
+export { Boss };
