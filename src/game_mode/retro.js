@@ -22,15 +22,15 @@ class RetroGame extends Base {
 
     loadEntities() {
         for (let row = 0; row < 11; row++) {
-            //                       game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple
             this.addPoolEntity(new Alien(this, [row * 50 + 70, 0 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][0], "alien_0", 3, 0, [row, 0]));
             this.addPoolEntity(new Alien(this, [row * 50 + 70, 1 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][0], "alien_0", 3, 0, [row, 1]));
             this.addPoolEntity(new Alien(this, [row * 50 + 70, 2 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_1", 3, 0, [row, 2]));
             this.addPoolEntity(new Alien(this, [row * 50 + 70, 3 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_1", 3, 0, [row, 3]));
             this.addPoolEntity(new Alien(this, [row * 50 + 70, 4 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][2], "alien_2", 3, 0, [row, 4]));
         }
-        const wall = new Wall(this, [500, 500]);
-            //game, coord, hp, max_hp, force, speed, sprites, scale, rotation
+        for (let i=0;i<4;i++) {
+            const wall = new Wall(this, [70 + 175*i, 500]);
+        }
         this.addPoolEntity(new Player(this, [400,600], 3, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
         this.addPoolEntity(new Score(this, [0, 0]));
     }
@@ -69,7 +69,6 @@ class RetroGame extends Base {
     }
 
     update(delta) {
-
         this.delta += delta;
         this.moveAlien();
         super.update(delta);

@@ -10,9 +10,7 @@ class LivingEntity extends Entity {
         this.speed = speed;
     }
 
-    onDeath() {
-
-    }
+    onDeath() {}
 
     damage(damage) {
         this.hp -= damage;

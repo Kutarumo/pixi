@@ -12,36 +12,37 @@ class Player extends LivingEntity {
         this.isHit = false;
         this.hitTime = 0;
         this.setupEventListeners();
-        this.eventListenersSet = true;
 
         this.sprite.play();
         this.addToScreen();
     }
 
+    onDeath() {
+        this.removeEventListener();
+    }
+
     setupEventListeners() {
-        window.addEventListener('keydown', (event) => this.handleKeyDown(event));
-        window.addEventListener('keyup', (event) => this.handleKeyUp(event));
-        this.eventListenersSet = true;
+        window.addEventListener('keydown', this.handleKeyDown);
+        window.addEventListener('keyup', this.handleKeyUp);
     }
 
     removeEventListener() {
-        window.removeEventListener('keydown', (event) => this.handleKeyDown(event));
-        window.removeEventListener('keyup', (event) => this.handleKeyUp(event));
-        this.eventListenersSet = false;
+        window.removeEventListener('keydown', this.handleKeyDown);
+        window.removeEventListener('keyup', this.handleKeyUp);
     }
 
-    handleKeyDown(event) {
+    handleKeyDown = (event) => {
         if (event.key === 'ArrowLeft') { this.isLeftKeyDown = true; } 
         else if (event.key === 'ArrowRight') { this.isRightKeyDown = true; }
     }
 
-    handleKeyUp(event) {
+    handleKeyUp = (event) => {
         if (event.key === 'ArrowLeft') this.isLeftKeyDown = false;
         else if (event.key === 'ArrowRight') this.isRightKeyDown = false;
         else if (event.key == ' ') {
             if (!this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.owner === this.owner)) {
                                                 //game, coord, hp, max_hp, force, speed, sprites, scale, rotation, owner
-                this.game.addPoolEntity(new Bullet(this.game, [...this.coord], 1, 1, 1, 3, this.game.texturesLoader.textures[2][0], 3, 0, this.owner));
+                this.game.addPoolEntity(new Bullet(this.game, [this.coord[0]+this.sprite.width/2, this.coord[1]], 1, 1, 1, 3, this.game.texturesLoader.textures[2][0], 3, 0, this.owner));
             }
         }
     }

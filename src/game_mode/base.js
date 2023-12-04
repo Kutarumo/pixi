@@ -6,7 +6,6 @@ class Base {
         this.pool = [];
         this.load_app();
         
-
         this.app.ticker.add(() => { this.update(this.app.ticker.deltaMS) });
     }
 
