@@ -2,6 +2,7 @@ import { LivingEntity } from "../libs/LivingEntity.js";
 import { Entity } from "../libs/Entity.js";
 import { Alien } from "./Alien.js";
 import { Player } from "./Player.js";
+import { Brique } from "./Brique.js";
 
 class Bullet extends LivingEntity {
 
@@ -43,12 +44,16 @@ class Bullet extends LivingEntity {
                 this.overlapsWith(entity) &&
                 this.owner !== entity.owner
             ) {
-                entity.damage(1);
+                if (entity instanceof Brique) {
+                    this.game.explodeWall(this.coord, 25);    
+                } else {
+                    entity.damage(1);
+                }
+                
                 this.damage(1);
                 return;
             }
         }
-            
         this.coord[1] -= this.speed;
         this.update_position();
     }

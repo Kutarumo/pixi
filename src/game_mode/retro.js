@@ -6,6 +6,9 @@ import { TexturesLoader } from '../libs/texturesLoader.js';
 import { Base } from './base.js';
 import { Boss } from '../entity/Boss.js';
 import { Wall } from '../entity/Wall.js';
+import { LivingEntity } from '../libs/LivingEntity.js';
+import { Brique } from '../entity/Brique.js';
+
 class RetroGame extends Base {
     constructor(size) {
         super(size);
@@ -30,6 +33,19 @@ class RetroGame extends Base {
             //game, coord, hp, max_hp, force, speed, sprites, scale, rotation
         this.addPoolEntity(new Player(this, [400,600], 3, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
         this.addPoolEntity(new Score(this, [0, 0]));
+    }
+
+    explodeWall(coord, radius) {
+        const entities = this.pool.filter(entity => entity instanceof Brique);
+        for (const entity of entities) {
+            const dist = Math.sqrt((entity.coord[0] - coord[0])**2 + (entity.coord[1] - coord[1])**2);
+            if (dist < radius) {
+                const distRel = dist/radius;
+                if (Math.random() < distRel) {
+                    entity.damage(1);
+                }
+            }
+        }
     }
 
     moveAlien() {
