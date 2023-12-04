@@ -5,7 +5,7 @@ class Brique extends LivingEntity{
     constructor(game, coord, width, height) {
         super(game, coord, 1, 1, 0, 0, null, 1, 0)
         this.owner = "wall";
-        this.sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
+        this.sprite = PIXI.Sprite.from(PIXI.Texture.WHITE);
         this.sprite.x = this.coord[0];
         this.sprite.y = this.coord[1];
         this.sprite.width = width;

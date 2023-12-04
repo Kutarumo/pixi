@@ -1,8 +1,6 @@
 class Base {
-    constructor(size) {
-        this.size = size;
-        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
-        this.app = new PIXI.Application({ width: this.size, height: this.size });
+    constructor(app) {
+        this.app = app;
         this.pool = [];
         this.load_app();
         

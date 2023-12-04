@@ -10,8 +10,8 @@ import { LivingEntity } from '../libs/LivingEntity.js';
 import { Brique } from '../entity/Brique.js';
 
 class RetroGame extends Base {
-    constructor(size) {
-        super(size);
+    constructor(app) {
+        super(app);
         this.texturesLoader = new TexturesLoader();
         this.step = -10;
         this.nbStep = 15;

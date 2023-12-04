@@ -14,7 +14,7 @@ class TexturesLoader {
             this.textures[0][i].push(PIXI.Texture.from(this.BASE_PATH+"alien/"+(i+1)+"-1.png"));
             this.textures[0][i].push(PIXI.Texture.from(this.BASE_PATH+"alien/"+(i+1)+"-2.png"));
         }
-        this.textures[0].push(PIXI.Texture.from(this.BASE_PATH+"alien/death.png"));
+        this.textures[0].push(PIXI.Texture.from(this.BASE_PATH+"alien/death-1.png"));
     }
 
     loadPlayer() {
