@@ -41,7 +41,7 @@ class Player extends LivingEntity {
         else if (event.key == ' ') {
             if (!this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.owner === this.owner)) {
                                                 //game, coord, hp, max_hp, force, speed, sprites, scale, rotation, owner
-                this.addPoolEntity(new Bullet(this.game, [...this.coord], 1, 1, 1, 3, this.game.texturesLoader.textures[2][0], 3, 0, this.owner));
+                this.game.addPoolEntity(new Bullet(this.game, [...this.coord], 1, 1, 1, 3, this.game.texturesLoader.textures[2][0], 3, 0, this.owner));
             }
         }
     }

@@ -5,59 +5,58 @@ import { Alien } from '../entity/Alien.js';
 import { TexturesLoader } from '../libs/texturesLoader.js';
 import { Base } from './base.js';
 import { Boss } from '../entity/Boss.js';
+import { Wall } from '../entity/Wall.js';
 class RetroGame extends Base {
     constructor(size) {
         super(size);
-        this.graphics = new PIXI.Graphics();
-        this.step = 10;
-        this.delta = 0;
         this.texturesLoader = new TexturesLoader();
+        this.step = -10;
+        this.nbStep = 15;
+        this.delta = 0;
+        this.score = 0;
         this.loadEntities();
-        console.log(this.texturesLoader.textures[2][0]);
     }
 
     loadEntities() {
         for (let row = 0; row < 11; row++) {
             //                       game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple
-            this.pool.push(new Alien(this, [row * 50 + 100, 0 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][0], "alien_0", 3, 0, [row, 0]));
-            this.pool.push(new Alien(this, [row * 50 + 100, 1 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][0], "alien_0", 3, 0, [row, 1]));
-            this.pool.push(new Alien(this, [row * 50 + 100, 2 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_1", 3, 0, [row, 2]));
-            this.pool.push(new Alien(this, [row * 50 + 100, 3 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_1", 3, 0, [row, 3]));
-            this.pool.push(new Alien(this, [row * 50 + 100, 4 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][2], "alien_2", 3, 0, [row, 4]));
+            this.addPoolEntity(new Alien(this, [row * 50 + 70, 0 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][0], "alien_0", 3, 0, [row, 0]));
+            this.addPoolEntity(new Alien(this, [row * 50 + 70, 1 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][0], "alien_0", 3, 0, [row, 1]));
+            this.addPoolEntity(new Alien(this, [row * 50 + 70, 2 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_1", 3, 0, [row, 2]));
+            this.addPoolEntity(new Alien(this, [row * 50 + 70, 3 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_1", 3, 0, [row, 3]));
+            this.addPoolEntity(new Alien(this, [row * 50 + 70, 4 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][2], "alien_2", 3, 0, [row, 4]));
         }
+        const wall = new Wall(this, [500, 500]);
             //game, coord, hp, max_hp, force, speed, sprites, scale, rotation
-        this.pool.push(new Player(this, [400,600], 3, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
-
-        // Définition des propriétés du rectangle
-        const rectWidth = 550;
-        const rectHeight = 250;
-        const rectColor = 0xFF0000; // Couleur en format hexadécimal
-
-        this.graphics.beginFill(rectColor, 0.5);
-        this.graphics.drawRect(this.pool[0].coord[0]-25, this.pool[0].coord[1]-25, rectWidth, rectHeight);
-        this.graphics.endFill();
-
-        this.app.stage.addChild(this.graphics);
+        this.addPoolEntity(new Player(this, [400,600], 3, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
+        this.addPoolEntity(new Score(this, [0, 0]));
     }
 
-    alienMove() {
+    moveAlien() {
         if (this.delta >= 500) {
+            const aliens = this.pool.filter(alien => alien instanceof Alien);
             this.delta = 0;
-            if (this.graphics.x < -30 || this.graphics.x >= 150) {
+            if (this.nbStep >= 15) {
+                this.nbStep = 0;
                 this.step *= -1;
-                this.graphics.y += Math.abs(this.step);
-                this.graphics.x += this.step/Math.abs(this.step/2);
+                for (const alien of aliens) {
+                    alien.coord[1] += Math.abs(this.step);
+                    alien.coord[0] += this.step/Math.abs(this.step/2);
+                }
             } else {
-                this.graphics.x += this.step;
+                this.nbStep += 1;
+                for (const alien of aliens) {
+                    alien.coord[0] += this.step;
+                }
             }
         }
     }
 
     update(delta) {
+
         this.delta += delta;
-        this.alienMove();
-        
-        super.update();
+        this.moveAlien();
+        super.update(delta);
     }
 
 }

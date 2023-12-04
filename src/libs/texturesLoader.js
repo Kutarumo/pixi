@@ -15,13 +15,12 @@ class TexturesLoader {
             this.textures[0][i].push(PIXI.Texture.from(this.BASE_PATH+"alien/"+(i+1)+"-2.png"));
         }
         this.textures[0].push(PIXI.Texture.from(this.BASE_PATH+"alien/death.png"));
-        console.log(this.textures);
     }
 
     loadPlayer() {
-            this.textures[1].push(PIXI.Texture.from(this.BASE_PATH+"player/Player.png")); 
-            
-        }
+        this.textures[1].push(PIXI.Texture.from(this.BASE_PATH+"player/Player.png")); 
+    }
+
     loadBullets(){
         this.textures[2][0].push(PIXI.Texture.from(this.BASE_PATH+"sprites/tir/1-1.png")); 
     }

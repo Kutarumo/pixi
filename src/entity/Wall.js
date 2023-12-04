@@ -20,9 +20,9 @@ class Wall {
             [1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
             [1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
             [1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
-        ]
+        ];
         this.wall = new PIXI.Graphics();
-        this.wall.beginFill(0xFF0000, 0     );
+        this.wall.beginFill(0xFF0000, 0);
         this.wall.drawRect(0,0,125,100);
         this.wall.endFill();
         this.create_wall();
@@ -40,7 +40,7 @@ class Wall {
         for (let y = 0; y < this.wall_bool.length; y++) {
             for (let x = 0; x < this.wall_bool[y].length; x++) {
                 if (this.wall_bool[y][x] === 1) {
-                    const brique = new Brique(width * x, height * y, width, height);
+                    const brique = new Brique(this.game, [width * x, height * y], width, height);
                     this.wall.addChild(brique.sprite);
                 }
             }

@@ -10,13 +10,16 @@ class LivingEntity extends Entity {
         this.speed = speed;
     }
 
+    onDeath() {
+
+    }
+
     damage(damage) {
+        this.hp -= damage;
         if (this.hp <= 0) {
+            this.onDeath();
             this.remove();
             return;
-        }
-        else {
-            this.hp -= damage;
         }
     }
 }

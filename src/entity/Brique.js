@@ -1,8 +1,12 @@
-class Brique {
-    constructor(x, y, width, height) {
+import { LivingEntity } from "../libs/LivingEntity.js";
+
+class Brique extends LivingEntity{
+    // game, coord, hp, max_hp, force, speed, sprites, scale, rotation
+    constructor(game, coord, width, height) {
+        super(game, coord, 1, 1, 0, 0, null, 1, 0)
         this.sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
-        this.sprite.x = x;
-        this.sprite.y = y;
+        this.sprite.x = this.coord[0];
+        this.sprite.y = this.coord[1];
         this.sprite.width = width;
         this.sprite.height = height;
     }

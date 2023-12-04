@@ -12,13 +12,13 @@ class Bullet extends LivingEntity {
     }
 
     overlapsWith(otherEntity) {
-        const x1 = this.coord[0];
-        const y1 = this.coord[1];
+        const x1 = this.coord[0] - this.sprite.width/2;
+        const y1 = this.coord[1] - this.sprite.height/2;
         const width1 = this.sprite.width;
         const height1 = this.sprite.height;
     
-        const x2 = otherEntity.sprite.x;
-        const y2 = otherEntity.sprite.y;
+        const x2 = otherEntity.sprite.x - otherEntity.sprite.width/2;
+        const y2 = otherEntity.sprite.y - otherEntity.sprite.height/2;
         const width2 = otherEntity.sprite.width;
         const height2 = otherEntity.sprite.height;
     
@@ -43,9 +43,7 @@ class Bullet extends LivingEntity {
                 this.overlapsWith(entity) &&
                 this.owner !== entity.owner
             ) {
-                if (entity instanceof Player) {
-                    entity.isHit = true;
-                }
+                entity.damage(1);
                 this.damage(1);
                 return;
             }
