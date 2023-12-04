@@ -22,7 +22,7 @@ class TexturesLoader {
     }
 
     loadBullets(){
-        this.textures[2][0].push(PIXI.Texture.from(this.BASE_PATH+"sprites/tir/1-1.png")); 
+        this.textures[2][0].push(PIXI.Texture.from(this.BASE_PATH+"bullet/1-1.png")); 
     }
     }
  
