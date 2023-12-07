@@ -7,6 +7,7 @@ import { Boss } from '../entity/Boss.js';
 import { Wall } from '../entity/Wall.js';
 import { LivingEntity } from '../libs/LivingEntity.js';
 import { Brique } from '../entity/Brique.js';
+import { MainMenu } from './main_menu.js';
 
 /**
  * Represents the main game class for the retro game.
@@ -22,6 +23,7 @@ class RetroGame extends Base {
         this.texturesLoader = new TexturesLoader();
         this.step = -10;
         this.nbStep = 15;
+        this.trip = 0;
         this.delta = 0;
         this.score = 0;
         this.loadEntities();
@@ -81,7 +83,11 @@ class RetroGame extends Base {
             if (this.nbStep >= 15) {
                 this.nbStep = 0;
                 this.step *= -1;
-
+                this.trip += 1;
+                if (this.trip > 15) {
+                    this.destroy();
+                    new MainMenu(this.app);
+                }
                 for (const alien of aliens) {
                     alien.coord[1] += Math.abs(this.step);
                     alien.coord[0] += this.step / Math.abs(this.step / 2);
