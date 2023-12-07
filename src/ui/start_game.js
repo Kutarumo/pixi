@@ -27,6 +27,12 @@ class StartGame {
         // Set the initial position of the text object
         this.textObj.x = this.coord[0];
         this.textObj.y = this.coord[1];
+
+        // Center the text horizontally and vertically
+        this.textObj.anchor.set(0.5);
+
+        // Add the start game button to the game screen
+        this.addToScreen();
     }
 
     /**

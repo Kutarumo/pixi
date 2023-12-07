@@ -24,8 +24,12 @@ class RegisterScore {
         // Set the default text for the score display
         this.text = "Rentre ton pseudo :\n";
 
+
+
         // Create the text object and add it to the screen
         this.createText();
+        // Center the text horizontally and vertically
+        this.textObj.anchor.set(0.5);
         this.setupEventListeners();
         this.addToScreen();
     }
@@ -71,34 +75,33 @@ class RegisterScore {
     }
 
     /**
- * Saves the current pseudo and score.
- */
-savePseudo() {
-    // Extract the pseudo from the current text (excluding the default text)
-    const pseudo = this.text.slice("Rentre ton pseudo :\n".length);
+     * Saves the current pseudo and score.
+     */
+    savePseudo() {
+        // Extract the pseudo from the current text (excluding the default text)
+        const pseudo = this.text.slice("Rentre ton pseudo :\n".length);
 
-    // Create a user object with the pseudo and the current score
-    const user = { 'name': pseudo, 'score': this.score };
+        // Create a user object with the pseudo and the current score
+        const user = { 'name': pseudo, 'score': this.score };
 
-    // Check if there are existing users in localStorage
-    const storedUsers = localStorage.getItem('users');
-    let users = [];
+        // Check if there are existing users in localStorage
+        const storedUsers = localStorage.getItem('users');
+        let users = [];
 
-    if (storedUsers) {
-        // Parse the existing users from localStorage
-        users = JSON.parse(storedUsers);
+        if (storedUsers) {
+            // Parse the existing users from localStorage
+            users = JSON.parse(storedUsers);
+        }
+
+        // Add the new user to the array of users
+        users.push(user);
+
+        // Save the updated 'users' array to localStorage
+        localStorage.setItem('users', JSON.stringify(users));
+
+        this.game.destroy();
+        new MainMenu(this.game.app);
     }
-
-    // Add the new user to the array of users
-    users.push(user);
-
-    // Save the updated 'users' array to localStorage
-    localStorage.setItem('users', JSON.stringify(users));
-
-    this.game.destroy();
-    new MainMenu(this.game.app);
-}
-
 
     /**
      * Creates the PIXI.Text object with the current score.
