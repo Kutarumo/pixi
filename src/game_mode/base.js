@@ -1,5 +1,6 @@
 /**
  * Base class representing the core functionality of the game.
+ * @class
  */
 class Base {
     /**

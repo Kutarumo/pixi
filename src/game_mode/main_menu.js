@@ -1,6 +1,11 @@
 import { StartGame } from "../ui/start_game.js";
 import { Base } from "./base.js";
 
+
+/**
+ * @module MainMenu
+ */
+
 /**
  * Represents the main menu of the game.
  * @extends Base
