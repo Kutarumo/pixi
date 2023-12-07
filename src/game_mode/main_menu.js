@@ -1,5 +1,6 @@
 import { StartGame } from "../ui/start_game.js";
 import { Base } from "../libs/base.js";
+import { RetroGame } from "./retro.js";
 
 
 /**
@@ -25,12 +26,17 @@ class MainMenu extends Base {
         this.start_game.textObj.interactive = true;
         this.start_game.textObj.buttonMode = true;
         this.start_game.textObj.on("pointerdown", (event) => {
-            console.log("click");
-            // Add logic to transition to the game or perform other actions on button click
+            this.destroy();
+            new RetroGame(this.app);
         });
 
         // Add the start game button to the screen
         this.start_game.addToScreen();
+    }
+
+    destroy() {
+        super.destroy();
+        this.app.stage.removeChild(this.start_game.textObj);
     }
 
     /**

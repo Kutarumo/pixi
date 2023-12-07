@@ -13,8 +13,8 @@ PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 const app = new PIXI.Application({ width: 800, height: 800 });
 
 // Uncomment one of the following lines to choose the game mode.
-// const game = new MainMenu(app);
-const game = new RetroGame(app);
+const game = new MainMenu(app);
+// const game = new RetroGame(app);
 
 /**
  * The main game loop function. Requests the next animation frame and keeps the game running.

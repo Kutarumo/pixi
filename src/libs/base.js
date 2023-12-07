@@ -16,9 +16,8 @@ class Base {
         this.loadApp();
 
         // Add the update function to the PIXI ticker
-        this.app.ticker.add(() => {
-            this.update(this.app.ticker.deltaMS);
-        });
+        this.ticker = () => { this.update(this.app.ticker.deltaMS) };
+        this.app.ticker.add(this.ticker);
     }
 
     /**
@@ -45,6 +44,13 @@ class Base {
      */
     loadApp() {
         document.body.appendChild(this.app.view);
+    }
+
+    destroy() {
+        this.app.ticker.remove(this.ticker);
+        for (const entity of [...this.pool]) {
+            entity.remove();
+        }
     }
 
     /**

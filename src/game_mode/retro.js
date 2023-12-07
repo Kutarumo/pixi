@@ -25,6 +25,7 @@ class RetroGame extends Base {
         this.delta = 0;
         this.score = 0;
         this.loadEntities();
+        this.textScore = new Score(this, [0, 0]);
     }
 
     /**
@@ -48,7 +49,7 @@ class RetroGame extends Base {
 
         // Load player and score entities
         this.addPoolEntity(new Player(this, [400, 600], 3, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
-        this.addPoolEntity(new Score(this, [0, 0]));
+        
     }
 
     /**
@@ -95,6 +96,11 @@ class RetroGame extends Base {
         }
     }
 
+    destroy() {
+        super.destroy();
+        this.app.stage.removeChild(this.textScore.textObj);
+    }
+
     /**
      * Updates the game state.
      * @param {number} delta - The time since the last frame.
@@ -102,6 +108,7 @@ class RetroGame extends Base {
     update(delta) {
         this.delta += delta;
         this.moveAlien();
+        this.textScore.update();
         super.update(delta);
     }
 }

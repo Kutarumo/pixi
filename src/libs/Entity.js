@@ -48,9 +48,6 @@ class Entity {
 
         // Remove the entity from the game's entity pool
         this.game.removePoolEntity(this);
-
-        // Destroy the sprite to free up resources
-        this.sprite.destroy();
     }
 
     /**
