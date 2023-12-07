@@ -26,6 +26,7 @@ class RetroGame extends Base {
         this.trip = 0;
         this.delta = 0;
         this.score = 0;
+        this.moveAlienSpeed = 500;
         this.loadEntities();
         this.textScore = new Score(this, [0, 0]);
     }
@@ -35,14 +36,7 @@ class RetroGame extends Base {
      */
     loadEntities() {
         // Load aliens
-        for (let row = 0; row < 11; row++) {
-            // Create and add aliens to the entity pool
-            this.addPoolEntity(new Alien(this, [row * 50 + 70, 0 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][0], "alien_0", 3, 0, [row, 0]));
-            this.addPoolEntity(new Alien(this, [row * 50 + 70, 1 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_0", 3, 0, [row, 1]));
-            this.addPoolEntity(new Alien(this, [row * 50 + 70, 2 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_1", 3, 0, [row, 2]));
-            this.addPoolEntity(new Alien(this, [row * 50 + 70, 3 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][2], "alien_1", 3, 0, [row, 3]));
-            this.addPoolEntity(new Alien(this, [row * 50 + 70, 4 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][2], "alien_2", 3, 0, [row, 4]));
-        }
+        this.spawnAlien();
 
         // Load walls
         for (let i = 0; i < 4; i++) {
@@ -52,6 +46,17 @@ class RetroGame extends Base {
         // Load player and score entities
         this.addPoolEntity(new Player(this, [400, 600], 3, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
         
+    }
+
+    spawnAlien() {
+        for (let row = 0; row < 11; row++) {
+            // Create and add aliens to the entity pool
+            this.addPoolEntity(new Alien(this, [row * 50 + 70, 0 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][0], "alien_0", 3, 0, [row, 0]));
+            this.addPoolEntity(new Alien(this, [row * 50 + 70, 1 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_0", 3, 0, [row, 1]));
+            this.addPoolEntity(new Alien(this, [row * 50 + 70, 2 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][1], "alien_1", 3, 0, [row, 2]));
+            this.addPoolEntity(new Alien(this, [row * 50 + 70, 3 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][2], "alien_1", 3, 0, [row, 3]));
+            this.addPoolEntity(new Alien(this, [row * 50 + 70, 4 * 50 + 100], 1, 1, 1, 0, this.texturesLoader.textures[0][2], "alien_2", 3, 0, [row, 4]));
+        }
     }
 
     /**
@@ -76,29 +81,36 @@ class RetroGame extends Base {
      * Moves the aliens based on a step and a number of steps.
      */
     moveAlien() {
-        if (this.delta >= 500) {
+        if (this.delta >= this.moveAlienSpeed) {
             const aliens = this.pool.filter(alien => alien instanceof Alien);
+            if (aliens.length === 0) {
+                this.spawnAlien();
+            } else if (aliens.length <= 27) {
+                this.moveAlienSpeed = 250;
+            }
             this.delta = 0;
 
             if (this.nbStep >= 15) {
                 this.nbStep = 0;
                 this.step *= -1;
                 this.trip += 1;
-                if (this.trip > 15) {
-                    this.destroy();
-                    new MainMenu(this.app);
-                }
                 for (const alien of aliens) {
                     alien.coord[1] += Math.abs(this.step);
                     alien.coord[0] += this.step / Math.abs(this.step / 2);
                 }
             } else {
                 this.nbStep += 1;
-
                 for (const alien of aliens) {
                     alien.coord[0] += this.step;
                 }
             }
+        }
+    }
+
+    gameover() {
+        if (this.trip > 15) {
+            this.destroy();
+            new MainMenu(this.app);
         }
     }
 
@@ -115,6 +127,7 @@ class RetroGame extends Base {
         this.delta += delta;
         this.moveAlien();
         this.textScore.update();
+        this.gameover();
         super.update(delta);
     }
 }
