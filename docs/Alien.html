@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Alien<span class="signature">(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Alien<span class="signature">(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple, score)</span><span class="type-signature"></span></h2>
         
             <div class="class-description">Represents an alien entity in the game.</div>
         
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Alien"><span class="type-signature"></span>new Alien<span class="signature">(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Alien"><span class="type-signature"></span>new Alien<span class="signature">(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple, score)</span><span class="type-signature"></span></h4>
     
 
     
@@ -336,6 +336,29 @@
             
 
             <td class="description last">The coordinate tuple of the alien.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>score</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The score value associated with the alien.</td>
         </tr>
 
     
@@ -779,7 +802,7 @@
 
 
 <div class="description">
-    Handles actions to be performed on alien death.
+    Handles actions to be performed on alien death.Increases the game score by the specified score value when the alien dies.
 </div>
 
 
@@ -828,7 +851,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="entity_Alien.js.html">entity/Alien.js</a>, <a href="entity_Alien.js.html#line44">line 44</a>
+        <a href="entity_Alien.js.html">entity/Alien.js</a>, <a href="entity_Alien.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -1063,7 +1086,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="entity_Alien.js.html">entity/Alien.js</a>, <a href="entity_Alien.js.html#line54">line 54</a>
+        <a href="entity_Alien.js.html">entity/Alien.js</a>, <a href="entity_Alien.js.html#line58">line 58</a>
     </li></ul></dd>
     
 
@@ -1156,7 +1179,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libs_Entity.js.html">libs/Entity.js</a>, <a href="libs_Entity.js.html#line59">line 59</a>
+        <a href="libs_Entity.js.html">libs/Entity.js</a>, <a href="libs_Entity.js.html#line56">line 56</a>
     </li></ul></dd>
     
 
@@ -1202,13 +1225,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-MainMenu.html">MainMenu</a></li></ul><h3>Classes</h3><ul><li><a href="Alien.html">Alien</a></li><li><a href="Base.html">Base</a></li><li><a href="Boss.html">Boss</a></li><li><a href="Brique.html">Brique</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Entity.html">Entity</a></li><li><a href="LivingEntity.html">LivingEntity</a></li><li><a href="Player.html">Player</a></li><li><a href="RetroGame.html">RetroGame</a></li><li><a href="Score.html">Score</a></li><li><a href="StartGame.html">StartGame</a></li><li><a href="TexturesLoader.html">TexturesLoader</a></li><li><a href="Wall.html">Wall</a></li><li><a href="module-MainMenu-MainMenu.html">MainMenu</a></li></ul><h3>Global</h3><ul><li><a href="global.html#extractFileName">extractFileName</a></li><li><a href="global.html#generateRandomBoolean">generateRandomBoolean</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-MainMenu.html">MainMenu</a></li></ul><h3>Classes</h3><ul><li><a href="Alien.html">Alien</a></li><li><a href="Base.html">Base</a></li><li><a href="Boss.html">Boss</a></li><li><a href="Brique.html">Brique</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Entity.html">Entity</a></li><li><a href="LivingEntity.html">LivingEntity</a></li><li><a href="Player.html">Player</a></li><li><a href="RegisterScore.html">RegisterScore</a></li><li><a href="RetroGame.html">RetroGame</a></li><li><a href="Score.html">Score</a></li><li><a href="ScoreList.html">ScoreList</a></li><li><a href="ScoreMenu.html">ScoreMenu</a></li><li><a href="StartGame.html">StartGame</a></li><li><a href="TexturesLoader.html">TexturesLoader</a></li><li><a href="Wall.html">Wall</a></li><li><a href="module-MainMenu-MainMenu.html">MainMenu</a></li></ul><h3>Global</h3><ul><li><a href="global.html#extractFileName">extractFileName</a></li><li><a href="global.html#generateRandomBoolean">generateRandomBoolean</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Dec 07 2023 11:36:02 GMT+0100 (heure normale d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Dec 08 2023 00:59:35 GMT+0100 (heure normale d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

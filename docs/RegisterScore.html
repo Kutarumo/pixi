@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Entity</title>
+    <title>JSDoc: Class: RegisterScore</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Entity</h1>
+    <h1 class="page-title">Class: RegisterScore</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Entity<span class="signature">(game, coord, sprites, scale, rotation)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>RegisterScore<span class="signature">(game, coord, score)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Represents a basic entity in the game.</div>
+            <div class="class-description">Represents the score display and input in the game.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Entity"><span class="type-signature"></span>new Entity<span class="signature">(game, coord, sprites, scale, rotation)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="RegisterScore"><span class="type-signature"></span>new RegisterScore<span class="signature">(game, coord, score)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Creates an instance of the Entity class.
+    Creates an instance of the RegisterScore class.
 </div>
 
 
@@ -128,37 +128,14 @@
 
             
 
-            <td class="description last">The initial coordinates of the entity.</td>
+            <td class="description last">The initial coordinates of the score display.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>sprites</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">PIXI.AnimatedSprite</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The animated sprites of the entity.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>scale</code></td>
+                <td class="name"><code>score</code></td>
             
 
             <td class="type">
@@ -174,30 +151,7 @@
 
             
 
-            <td class="description last">The scale of the entity.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>rotation</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The initial rotation of the entity.</td>
+            <td class="description last">The current game score.</td>
         </tr>
 
     
@@ -238,7 +192,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libs_Entity.js.html">libs/Entity.js</a>, <a href="libs_Entity.js.html#line6">line 6</a>
+        <a href="ui_Register_score.js.html">ui/Register_score.js</a>, <a href="ui_Register_score.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -284,6 +238,72 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="handleKeyDown"><span class="type-signature"></span>handleKeyDown<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles keydown events for player input.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_Register_score.js.html">ui/Register_score.js</a>, <a href="ui_Register_score.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -302,7 +322,7 @@
 
 
 <div class="description">
-    Adds the entity's sprite to the game screen.
+    Adds the score display to the game screen.
 </div>
 
 
@@ -346,7 +366,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libs_Entity.js.html">libs/Entity.js</a>, <a href="libs_Entity.js.html#line30">line 30</a>
+        <a href="ui_Register_score.js.html">ui/Register_score.js</a>, <a href="ui_Register_score.js.html#line120">line 120</a>
     </li></ul></dd>
     
 
@@ -382,7 +402,7 @@
     
 
     
-    <h4 class="name" id="getPoolEntity"><span class="type-signature"></span>getPoolEntity<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="createText"><span class="type-signature"></span>createText<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -390,7 +410,7 @@
 
 
 <div class="description">
-    Placeholder method to get a pool entity.This method can be overridden in subclasses as needed.
+    Creates the PIXI.Text object with the current score.
 </div>
 
 
@@ -434,7 +454,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libs_Entity.js.html">libs/Entity.js</a>, <a href="libs_Entity.js.html#line38">line 38</a>
+        <a href="ui_Register_score.js.html">ui/Register_score.js</a>, <a href="ui_Register_score.js.html#line111">line 111</a>
     </li></ul></dd>
     
 
@@ -470,7 +490,7 @@
     
 
     
-    <h4 class="name" id="remove"><span class="type-signature"></span>remove<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="removeEventListener"><span class="type-signature"></span>removeEventListener<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -478,7 +498,7 @@
 
 
 <div class="description">
-    Removes the entity from the game.
+    Removes event listeners for keyboard input.
 </div>
 
 
@@ -522,7 +542,183 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libs_Entity.js.html">libs/Entity.js</a>, <a href="libs_Entity.js.html#line45">line 45</a>
+        <a href="ui_Register_score.js.html">ui/Register_score.js</a>, <a href="ui_Register_score.js.html#line48">line 48</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="savePseudo"><span class="type-signature"></span>savePseudo<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Saves the current pseudo and score to localStorage.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_Register_score.js.html">ui/Register_score.js</a>, <a href="ui_Register_score.js.html#line81">line 81</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setupEventListeners"><span class="type-signature"></span>setupEventListeners<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets up event listeners for keyboard input.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_Register_score.js.html">ui/Register_score.js</a>, <a href="ui_Register_score.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -566,7 +762,7 @@
 
 
 <div class="description">
-    Updates the state of the entity.This method can be overridden in subclasses as needed.
+    Updates the score displayed on the screen.
 </div>
 
 
@@ -610,95 +806,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libs_Entity.js.html">libs/Entity.js</a>, <a href="libs_Entity.js.html#line65">line 65</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="update_position"><span class="type-signature"></span>update_position<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Updates the position of the entity's sprite.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libs_Entity.js.html">libs/Entity.js</a>, <a href="libs_Entity.js.html#line56">line 56</a>
+        <a href="ui_Register_score.js.html">ui/Register_score.js</a>, <a href="ui_Register_score.js.html#line127">line 127</a>
     </li></ul></dd>
     
 

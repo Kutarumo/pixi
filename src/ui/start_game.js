@@ -4,12 +4,13 @@
 class StartGame {
     /**
      * Creates an instance of the StartGame class.
+     *
      * @param {Game} game - The game instance.
      * @param {number[]} coord - The initial coordinates of the start game button.
      */
     constructor(game, coord) {
-        this.game = game;
-        this.coord = coord;
+        this.game = game; // Reference to the game instance
+        this.coord = coord; // Initial coordinates of the start game button
 
         // Define the text style for the button
         this.style = new PIXI.TextStyle({

@@ -39,6 +39,7 @@ class Alien extends LivingEntity {
 
     /**
      * Creates an instance of the Alien class.
+     *
      * @param {Game} game - The game instance.
      * @param {number[]} coord - The initial coordinates of the alien.
      * @param {number} hp - The current health points of the alien.
@@ -50,38 +51,40 @@ class Alien extends LivingEntity {
      * @param {number} scale - The scale of the alien.
      * @param {number} rotation - The initial rotation of the alien.
      * @param {number[]} coord_tuple - The coordinate tuple of the alien.
+     * @param {number} score - The score value associated with the alien.
      */
-    constructor(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple) {
+    constructor(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple, score) {
         super(game, coord, hp, max_hp, force, speed, sprites, scale, rotation);
 
         // Additional properties for Alien class
-        this.coord_tuple = coord_tuple;
-        this.owner = state;
-        this.sprite.animationSpeed = 0.01;
-        this.sprite.anchor.set(0.5);
-        this.delta = 0;
+        this.coord_tuple = coord_tuple; // Array representing the coordinates of the alien
+        this.owner = state; // String representing the owner state of the alien
+        this.sprite.animationSpeed = 0.01; // Set the animation speed of the alien sprite
+        this.sprite.anchor.set(0.5); // Set the anchor point of the sprite to the center
+        this.delta = 0; // Initialize time delta
+        this.score = score; // Score value associated with the alien
 
         // Play the animation and Add sprite to screen
-        this.sprite.play();
-        this.addToScreen();
+        this.sprite.play(); // Start playing the animation
+        this.addToScreen(); // Add the alien sprite to the game screen
     }
 
     /**
      * Handles actions to be performed on alien death.
+     * Increases the game score by the specified score value when the alien dies.
      */
     onDeath() {
-        // Increase the game score by 10 when the alien dies
-        this.game.score += 10;
-        console.log(this.game.score);
+        this.game.score += this.score; // Increase the game score by the alien's score value
+        console.log(this.game.score); // Log the updated game score to the console
     }
 
     /**
      * Updates the state of the alien.
+     *
      * @param {number} delta - The time difference since the last update.
      */
     update(delta) {
-        // Accumulate time delta
-        this.delta += delta;
+        this.delta += delta; // Accumulate time delta
 
         // Check if there is no alien below the current alien's position
         const alienBelow = this.game.pool.filter(alien => alien instanceof Alien).some(alien => this.coord_tuple[0] === alien.coord_tuple[0] &amp;&amp; this.coord_tuple[1] + 1 === alien.coord_tuple[1]);
@@ -108,13 +111,13 @@ export { Alien };
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-MainMenu.html">MainMenu</a></li></ul><h3>Classes</h3><ul><li><a href="Alien.html">Alien</a></li><li><a href="Base.html">Base</a></li><li><a href="Boss.html">Boss</a></li><li><a href="Brique.html">Brique</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Entity.html">Entity</a></li><li><a href="LivingEntity.html">LivingEntity</a></li><li><a href="Player.html">Player</a></li><li><a href="RetroGame.html">RetroGame</a></li><li><a href="Score.html">Score</a></li><li><a href="StartGame.html">StartGame</a></li><li><a href="TexturesLoader.html">TexturesLoader</a></li><li><a href="Wall.html">Wall</a></li><li><a href="module-MainMenu-MainMenu.html">MainMenu</a></li></ul><h3>Global</h3><ul><li><a href="global.html#extractFileName">extractFileName</a></li><li><a href="global.html#generateRandomBoolean">generateRandomBoolean</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-MainMenu.html">MainMenu</a></li></ul><h3>Classes</h3><ul><li><a href="Alien.html">Alien</a></li><li><a href="Base.html">Base</a></li><li><a href="Boss.html">Boss</a></li><li><a href="Brique.html">Brique</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Entity.html">Entity</a></li><li><a href="LivingEntity.html">LivingEntity</a></li><li><a href="Player.html">Player</a></li><li><a href="RegisterScore.html">RegisterScore</a></li><li><a href="RetroGame.html">RetroGame</a></li><li><a href="Score.html">Score</a></li><li><a href="ScoreList.html">ScoreList</a></li><li><a href="ScoreMenu.html">ScoreMenu</a></li><li><a href="StartGame.html">StartGame</a></li><li><a href="TexturesLoader.html">TexturesLoader</a></li><li><a href="Wall.html">Wall</a></li><li><a href="module-MainMenu-MainMenu.html">MainMenu</a></li></ul><h3>Global</h3><ul><li><a href="global.html#extractFileName">extractFileName</a></li><li><a href="global.html#generateRandomBoolean">generateRandomBoolean</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Dec 07 2023 11:36:02 GMT+0100 (heure normale d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Dec 08 2023 00:59:34 GMT+0100 (heure normale d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

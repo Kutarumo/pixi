@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Base</title>
+    <title>JSDoc: Class: ScoreMenu</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Base</h1>
+    <h1 class="page-title">Class: ScoreMenu</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Base<span class="signature">(app)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ScoreMenu<span class="signature">(app, score)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Base class representing the core functionality of the game.</div>
+            <div class="class-description">Represents the score menu in the game.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Base"><span class="type-signature"></span>new Base<span class="signature">(app)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ScoreMenu"><span class="type-signature"></span>new ScoreMenu<span class="signature">(app, score)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Creates an instance of the Base class.
+    Creates an instance of the ScoreMenu class.
 </div>
 
 
@@ -109,6 +109,29 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>score</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The score to be registered.</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -146,7 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libs_base.js.html">libs/base.js</a>, <a href="libs_base.js.html#line5">line 5</a>
+        <a href="game_mode_score_menu.js.html">game_mode/score_menu.js</a>, <a href="game_mode_score_menu.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -178,6 +201,17 @@
 
     
     </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="Base.html">Base</a></li>
+    </ul>
+
 
     
 
@@ -283,6 +317,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Base.html#addPoolEntity">Base#addPoolEntity</a>
+    </li></ul></dd>
+    
 
     
 
@@ -304,6 +343,182 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="libs_base.js.html">libs/base.js</a>, <a href="libs_base.js.html#line27">line 27</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addScore"><span class="type-signature"></span>addScore<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Initializes and displays the score-related UI elements.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="game_mode_score_menu.js.html">game_mode/score_menu.js</a>, <a href="game_mode_score_menu.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="destroy"><span class="type-signature"></span>destroy<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Destroys the ScoreMenu instance.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="game_mode_score_menu.js.html">game_mode/score_menu.js</a>, <a href="game_mode_score_menu.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -370,6 +585,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Base.html#loadApp">Base#loadApp</a>
+    </li></ul></dd>
     
 
     
@@ -508,6 +728,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Base.html#removePoolEntity">Base#removePoolEntity</a>
+    </li></ul></dd>
+    
 
     
 
@@ -564,7 +789,7 @@
     
 
     
-    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">(delta)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -572,7 +797,7 @@
 
 
 <div class="description">
-    Updates the game state based on the elapsed time.
+    Updates the ScoreMenu state.
 </div>
 
 
@@ -581,55 +806,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>delta</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The time elapsed since the last frame.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -644,6 +820,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Base.html#update">Base#update</a>
+    </li></ul></dd>
     
 
     
@@ -665,7 +846,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libs_base.js.html">libs/base.js</a>, <a href="libs_base.js.html#line60">line 60</a>
+        <a href="game_mode_score_menu.js.html">game_mode/score_menu.js</a>, <a href="game_mode_score_menu.js.html#line44">line 44</a>
     </li></ul></dd>
     
 

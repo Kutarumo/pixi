@@ -17,19 +17,20 @@ import { ScoreMenu } from './score_menu.js';
 class RetroGame extends Base {
     /**
      * Creates an instance of the RetroGame class.
+     *
      * @param {PIXI.Application} app - The PIXI.Application instance.
      */
     constructor(app) {
         super(app);
-        this.texturesLoader = new TexturesLoader();
-        this.step = -10;
-        this.nbStep = 15;
-        this.trip = 0;
-        this.delta = 0;
-        this.score = 0;
-        this.moveAlienSpeed = 500;
-        this.loadEntities();
-        this.textScore = new Score(this, [0, 0]);
+        this.texturesLoader = new TexturesLoader(); // Load textures for game entities
+        this.step = -10; // Initial step for alien movement
+        this.nbStep = 15; // Number of steps for alien movement
+        this.trip = 0; // Trip count for alien movement
+        this.delta = 0; // Time delta since the last frame
+        this.score = 0; // Current game score
+        this.moveAlienSpeed = 500; // Speed at which aliens move
+        this.loadEntities(); // Load initial entities into the game
+        this.textScore = new Score(this, [0, 0]); // Initialize the game score display
     }
 
     /**
@@ -41,14 +42,16 @@ class RetroGame extends Base {
 
         // Load walls
         for (let i = 0; i < 4; i++) {
-            const wall = new Wall(this, [70 + 175 * i, 500]);
+            const wall = new Wall(this, [70 + 175 * i, 500]); // Create and add walls to the entity pool
         }
 
         // Load player and score entities
         this.addPoolEntity(new Player(this, [400, 600], 1, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
-        
     }
 
+    /**
+     * Spawns aliens in predefined patterns.
+     */
     spawnAlien() {
         for (let row = 0; row < 11; row++) {
             // Create and add aliens to the entity pool
@@ -62,6 +65,7 @@ class RetroGame extends Base {
 
     /**
      * Causes an explosion in the wall entities within a specified radius.
+     *
      * @param {number[]} coord - The coordinates of the explosion.
      * @param {number} radius - The radius of the explosion.
      */
@@ -85,9 +89,9 @@ class RetroGame extends Base {
         if (this.delta >= this.moveAlienSpeed) {
             const aliens = this.pool.filter(alien => alien instanceof Alien);
             if (aliens.length === 0) {
-                this.spawnAlien();
+                this.spawnAlien(); // Respawn aliens if none are left
             } else if (aliens.length <= 27) {
-                this.moveAlienSpeed = 250;
+                this.moveAlienSpeed = 250; // Increase alien movement speed if certain conditions are met
             }
             this.delta = 0;
 
@@ -108,20 +112,27 @@ class RetroGame extends Base {
         }
     }
 
+    /**
+     * Checks for game over conditions and ends the game if necessary.
+     */
     gameover() {
         if (this.trip > 15) {
-            this.destroy();
-            new ScoreMenu(this.app, this.score);
+            this.destroy(); // Clean up and end the game
+            new ScoreMenu(this.app, this.score); // Display the score menu
         }
     }
 
+    /**
+     * Destroys the game instance.
+     */
     destroy() {
         super.destroy();
-        this.app.stage.removeChild(this.textScore.textObj);
+        this.app.stage.removeChild(this.textScore.textObj); // Remove the score display from the stage
     }
 
     /**
      * Updates the game state.
+     *
      * @param {number} delta - The time since the last frame.
      */
     update(delta) {

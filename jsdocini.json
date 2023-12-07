@@ -1,9 +1,0 @@
-{
-    "source": {
-      "include": ["src/game_mode/*.js", "src/entity/*.js", "src/libs/*.js", "src/ui/*.js", "src/*.js"]
-    },
-    "opts": {
-      "destination": "./out"
-    }
-  }
-  

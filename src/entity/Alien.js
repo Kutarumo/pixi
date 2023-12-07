@@ -11,6 +11,7 @@ class Alien extends LivingEntity {
 
     /**
      * Creates an instance of the Alien class.
+     *
      * @param {Game} game - The game instance.
      * @param {number[]} coord - The initial coordinates of the alien.
      * @param {number} hp - The current health points of the alien.
@@ -22,39 +23,40 @@ class Alien extends LivingEntity {
      * @param {number} scale - The scale of the alien.
      * @param {number} rotation - The initial rotation of the alien.
      * @param {number[]} coord_tuple - The coordinate tuple of the alien.
+     * @param {number} score - The score value associated with the alien.
      */
     constructor(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple, score) {
         super(game, coord, hp, max_hp, force, speed, sprites, scale, rotation);
 
         // Additional properties for Alien class
-        this.coord_tuple = coord_tuple;
-        this.owner = state;
-        this.sprite.animationSpeed = 0.01;
-        this.sprite.anchor.set(0.5);
-        this.delta = 0;
-        this.score = score;
+        this.coord_tuple = coord_tuple; // Array representing the coordinates of the alien
+        this.owner = state; // String representing the owner state of the alien
+        this.sprite.animationSpeed = 0.01; // Set the animation speed of the alien sprite
+        this.sprite.anchor.set(0.5); // Set the anchor point of the sprite to the center
+        this.delta = 0; // Initialize time delta
+        this.score = score; // Score value associated with the alien
 
         // Play the animation and Add sprite to screen
-        this.sprite.play();
-        this.addToScreen();
+        this.sprite.play(); // Start playing the animation
+        this.addToScreen(); // Add the alien sprite to the game screen
     }
 
     /**
      * Handles actions to be performed on alien death.
+     * Increases the game score by the specified score value when the alien dies.
      */
     onDeath() {
-        // Increase the game score by 10 when the alien dies
-        this.game.score += this.score;
-        console.log(this.game.score);
+        this.game.score += this.score; // Increase the game score by the alien's score value
+        console.log(this.game.score); // Log the updated game score to the console
     }
 
     /**
      * Updates the state of the alien.
+     *
      * @param {number} delta - The time difference since the last update.
      */
     update(delta) {
-        // Accumulate time delta
-        this.delta += delta;
+        this.delta += delta; // Accumulate time delta
 
         // Check if there is no alien below the current alien's position
         const alienBelow = this.game.pool.filter(alien => alien instanceof Alien).some(alien => this.coord_tuple[0] === alien.coord_tuple[0] && this.coord_tuple[1] + 1 === alien.coord_tuple[1]);

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: game_mode/main_menu.js</title>
+    <title>JSDoc: Source: game_mode/score_menu.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: game_mode/main_menu.js</h1>
+    <h1 class="page-title">Source: game_mode/score_menu.js</h1>
 
     
 
@@ -26,57 +26,58 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { StartGame } from "../ui/start_game.js";
-import { Base } from "../libs/base.js";
-import { RetroGame } from "./retro.js";
-
-
-/**
- * @module MainMenu
- */
+            <pre class="prettyprint source linenums"><code>import { Base } from "../libs/base.js";
+import { RegisterScore } from "../ui/Register_score.js";
+import { ScoreList } from "../ui/score_list.js";
 
 /**
- * Represents the main menu of the game.
+ * Represents the score menu in the game.
  * @extends Base
  */
-class MainMenu extends Base {
+class ScoreMenu extends Base {
     /**
-     * Creates an instance of the MainMenu class.
+     * Creates an instance of the ScoreMenu class.
+     *
      * @param {PIXI.Application} app - The PIXI.Application instance.
+     * @param {number} score - The score to be registered.
      */
-    constructor(app) {
+    constructor(app, score) {
         super(app);
-
-        // Set up the menu
-        this.setupMenu();
-
-        // Configure interaction for the start game button
-        this.start_game.textObj.interactive = true;
-        this.start_game.textObj.buttonMode = true;
-        this.start_game.textObj.on("pointerdown", (event) => {
-            this.destroy();
-            new RetroGame(this.app);
-        });
-
-        // Add the start game button to the screen
-        this.start_game.addToScreen();
-    }
-
-    destroy() {
-        super.destroy();
-        this.app.stage.removeChild(this.start_game.textObj);
+        this.users = []; // Array to store user data (if needed)
+        this.score = score; // The score to be displayed in the menu
+        this.addScore(); // Initialize and display the score-related UI elements
     }
 
     /**
-     * Sets up the menu components.
+     * Destroys the ScoreMenu instance.
      */
-    setupMenu() {
-        this.start_game = new StartGame(this, [400, 400]);
+    destroy() {
+        super.destroy(); // Call the destroy method of the base class
+        this.add_score.removeEventListener(); // Remove event listeners from the RegisterScore instance
+        this.app.stage.removeChild(this.add_score.textObj); // Remove the RegisterScore text object from the stage
+        this.app.stage.removeChild(this.add_score_list.textObj); // Remove the ScoreList text object from the stage
+    }
+
+    /**
+     * Initializes and displays the score-related UI elements.
+     */
+    addScore() {
+        this.add_score = new RegisterScore(this, [400, 400], this.score); // Create a new RegisterScore instance
+        this.add_score_list = new ScoreList(this, [400, 500]); // Create a new ScoreList instance
+    }
+
+    /**
+     * Updates the ScoreMenu state.
+     */
+    update() {
+        super.update(); // Call the update method of the base class
+        this.add_score.update(); // Update the RegisterScore instance
+        this.add_score_list.update(); // Update the ScoreList instance
     }
 }
 
-// Export the MainMenu class for use in other modules
-export { MainMenu };
+// Export the ScoreMenu class for use in other modules
+export { ScoreMenu };
 </code></pre>
         </article>
     </section>
