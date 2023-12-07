@@ -23,7 +23,7 @@ class Alien extends LivingEntity {
      * @param {number} rotation - The initial rotation of the alien.
      * @param {number[]} coord_tuple - The coordinate tuple of the alien.
      */
-    constructor(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple) {
+    constructor(game, coord, hp, max_hp, force, speed, sprites, state, scale, rotation, coord_tuple, score) {
         super(game, coord, hp, max_hp, force, speed, sprites, scale, rotation);
 
         // Additional properties for Alien class
@@ -32,6 +32,7 @@ class Alien extends LivingEntity {
         this.sprite.animationSpeed = 0.01;
         this.sprite.anchor.set(0.5);
         this.delta = 0;
+        this.score = score;
 
         // Play the animation and Add sprite to screen
         this.sprite.play();
@@ -43,7 +44,7 @@ class Alien extends LivingEntity {
      */
     onDeath() {
         // Increase the game score by 10 when the alien dies
-        this.game.score += 10;
+        this.game.score += this.score;
         console.log(this.game.score);
     }
 
