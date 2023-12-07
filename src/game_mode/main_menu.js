@@ -1,5 +1,5 @@
 import { StartGame } from "../ui/start_game.js";
-import { Base } from "./base.js";
+import { Base } from "../libs/base.js";
 
 
 /**

@@ -2,7 +2,7 @@ import { Player } from '../entity/Player.js';
 import { Score } from '../ui/Score.js';
 import { Alien } from '../entity/Alien.js';
 import { TexturesLoader } from '../libs/texturesLoader.js';
-import { Base } from './base.js';
+import { Base } from '../libs/base.js';
 import { Boss } from '../entity/Boss.js';
 import { Wall } from '../entity/Wall.js';
 import { LivingEntity } from '../libs/LivingEntity.js';
