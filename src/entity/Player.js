@@ -1,4 +1,5 @@
 import { MainMenu } from "../game_mode/main_menu.js";
+import { ScoreMenu } from "../game_mode/score_menu.js";
 import { LivingEntity } from "../libs/LivingEntity.js";
 import { Bullet } from './Bullet.js';
 
@@ -48,7 +49,7 @@ class Player extends LivingEntity {
     onDeath() {
         this.removeEventListener();
         this.game.destroy();
-        new MainMenu(this.game.app);
+        new ScoreMenu(this.game.app, this.game.score);
     }
 
     /**

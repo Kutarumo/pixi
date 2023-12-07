@@ -8,6 +8,7 @@ import { Wall } from '../entity/Wall.js';
 import { LivingEntity } from '../libs/LivingEntity.js';
 import { Brique } from '../entity/Brique.js';
 import { MainMenu } from './main_menu.js';
+import { ScoreMenu } from './score_menu.js';
 
 /**
  * Represents the main game class for the retro game.
@@ -44,7 +45,7 @@ class RetroGame extends Base {
         }
 
         // Load player and score entities
-        this.addPoolEntity(new Player(this, [400, 600], 3, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
+        this.addPoolEntity(new Player(this, [400, 600], 1, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
         
     }
 
@@ -110,7 +111,7 @@ class RetroGame extends Base {
     gameover() {
         if (this.trip > 15) {
             this.destroy();
-            new MainMenu(this.app);
+            new ScoreMenu(this.app, this.score);
         }
     }
 
