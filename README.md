@@ -64,6 +64,6 @@ Nous sommes ouverts aux contributions ! Si vous souhaitez contribuer à l'améli
 
 ## Auteurs
 
-- [Kutarumo (MOE)](https://github.com/Kutarumo) : MOE
-- [fr33zingH3ll (Lead-Dev)](https://github.com/fr33zingH3ll) : Lead-Dev
-- [YasinAgh (Dev)](https://github.com/YasinAgh) : Dev
+- [Kutarumo (MOE)](https://github.com/Kutarumo)
+- [fr33zingH3ll (Lead-Dev)](https://github.com/fr33zingH3ll)
+- [YasinAgh (Dev)](https://github.com/YasinAgh)
