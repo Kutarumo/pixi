@@ -11,10 +11,7 @@ L'objectif principal de ce projet était d'apprendre à travailler en équipe su
 - **Contrôles Intuitifs :** Les contrôles ont été simplifiés pour une expérience de jeu fluide. Utilisez les touches directionnelles pour déplacer le vaisseau spatial et la barre d'espace pour tirer sur les envahisseurs.
 
 ## Comment Jouer
-# Jouer au jeu
 Version en ligne disponible a l'url: spaceinvader.freezinghell.cc
-Documentation du code sur: spaceinvader.freezinghell.cc/docs
-
 
 ## Contributions
 
@@ -25,7 +22,7 @@ Clonez ce dépôt sur votre machine locale.
    ```bash
    git clone https://github.com/Kutarumo/pixi
    ```
-Ourvrez le repositoty sur un IDE telle que VSCode.
+Ourvrez le repositoty sur un IDE telle que VSCode. Documentation du code sur: spaceinvader.freezinghell.cc/docs
 Dans un terminal installer les dépendances requises avec:
     ```
     npm install
