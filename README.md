@@ -40,11 +40,11 @@ Nous sommes ouverts aux contributions ! Si vous souhaitez contribuer à l'améli
     ```
     Ourvrez le repositoty sur un IDE telle que VSCode.  
     Documentation du code sur: http://spaceinvader.freezinghell.cc/docs  
-    Dans un terminal installer les dépendances requises avec:  
+    Dans un terminal installer les dépendances requises avec:
         ```
         npm install
-        ```
-    Puis lancez le projet avec:  
+        ```  
+    Puis lancez le projet avec:
         ```
         npm start
         ```
