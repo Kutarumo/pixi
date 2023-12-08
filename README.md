@@ -62,7 +62,8 @@ Nous sommes ouverts aux contributions ! Si vous souhaitez contribuer à l'améli
     ```
 5. Ouvrez une Pull Request.
 
-## Auteur
-Kutarumo: MOE  
-fr33zingH3ll: Lead-Dev  
-YasinAgh: dev  
+## Auteurs
+
+- [Kutarumo (MOE)](https://github.com/Kutarumo) : MOE
+- [fr33zingH3ll (Lead-Dev)](https://github.com/fr33zingH3ll) : Lead-Dev
+- [YasinAgh (Dev)](https://github.com/YasinAgh) : Dev
