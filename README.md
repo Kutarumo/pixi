@@ -54,7 +54,7 @@ Nous sommes ouverts aux contributions ! Si vous souhaitez contribuer à l'améli
     ```
 3. Committez vos modifications 
     ```
-    git commit -m 'Ajout de votre amélioration
+    git commit -m 'Ajout de votre amélioration'
     ```
 4. Poussez la branche. 
     ```
