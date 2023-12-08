@@ -11,7 +11,23 @@ L'objectif principal de ce projet était d'apprendre à travailler en équipe su
 - **Contrôles Intuitifs :** Les contrôles ont été simplifiés pour une expérience de jeu fluide. Utilisez les touches directionnelles pour déplacer le vaisseau spatial et la barre d'espace pour tirer sur les envahisseurs.
 
 ## Comment Jouer
-Version en ligne disponible a l'url: spaceinvader.freezinghell.cc
+Version en ligne disponible a l'url: http://spaceinvader.freezinghell.cc
+
+pour commencer a jouer il faut appuyer sur le bouton start game
+
+![Capture d'écran 1](https://github.com/Kutarumo/pixi/tree/main/src/publics/userdocs/homescreen.png)
+*menu d'accueil*
+
+Le joueur est le petit vaisseau en vert et il est déplacable de gauche a droite avec les touches directionnelles du clavier.  
+Le tir est effectué en appuyant sur la barre espace du clavier.
+
+![Capture d'écran 2](https://github.com/Kutarumo/pixi/tree/main/src/publics/userdocs/bulletscreen.png)
+*tir du joueur*
+
+Le score peut etre enregistrer une fois les trois vie du joueur épuisé. Il s'agit d'un enregistrement locale qui n'est pas mis en ligne.
+
+![Capture d'écran 2](https://github.com/Kutarumo/pixi/tree/main/src/publics/userdocs/scorescreen.png)
+*tir du joueur*
 
 ## Contributions
 
