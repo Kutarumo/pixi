@@ -34,19 +34,19 @@ Le score peut etre enregistrer une fois les trois vie du joueur épuisé. Il s'a
 Nous sommes ouverts aux contributions ! Si vous souhaitez contribuer à l'amélioration du jeu, veuillez suivre ces étapes :
 
 1. Forkez le projet comme suit:
-Clonez ce dépôt sur votre machine locale.
-   ```bash
-   git clone https://github.com/Kutarumo/pixi
-   ```
-Ourvrez le repositoty sur un IDE telle que VSCode. Documentation du code sur: spaceinvader.freezinghell.cc/docs
-Dans un terminal installer les dépendances requises avec:
+    Clonez ce dépôt sur votre machine locale.
+    ```bash
+    git clone https://github.com/Kutarumo/pixi
     ```
-    npm install
-    ```
-Puis lancez le projet avec:
-    ```
-    npm start
-    ```
+    Ourvrez le repositoty sur un IDE telle que VSCode. Documentation du code sur: spaceinvader.freezinghell.cc/docs
+    Dans un terminal installer les dépendances requises avec:
+        ```
+        npm install
+        ```
+    Puis lancez le projet avec:
+        ```
+        npm start
+        ```
 2. Créez une branche pour votre fonctionnalité. 
     ```
     git checkout -b amelioration-fonctionnalite
@@ -62,6 +62,6 @@ Puis lancez le projet avec:
 5. Ouvrez une Pull Request.
 
 ## Auteur
-Kutarumo: MOE
-fr33zingH3ll: Lead-Dev
-YasinAgh: dev
+Kutarumo: MOE  
+fr33zingH3ll: Lead-Dev  
+YasinAgh: dev  
