@@ -38,12 +38,13 @@ Nous sommes ouverts aux contributions ! Si vous souhaitez contribuer à l'améli
     ```bash
     git clone https://github.com/Kutarumo/pixi
     ```
-    Ourvrez le repositoty sur un IDE telle que VSCode. Documentation du code sur: spaceinvader.freezinghell.cc/docs
-    Dans un terminal installer les dépendances requises avec:
+    Ourvrez le repositoty sur un IDE telle que VSCode.  
+    Documentation du code sur: http://spaceinvader.freezinghell.cc/docs  
+    Dans un terminal installer les dépendances requises avec:  
         ```
         npm install
         ```
-    Puis lancez le projet avec:
+    Puis lancez le projet avec:  
         ```
         npm start
         ```
