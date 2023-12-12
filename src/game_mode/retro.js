@@ -28,7 +28,7 @@ class RetroGame extends Base {
         this.trip = 0; // Trip count for alien movement
         this.delta = 0; // Time delta since the last frame
         this.score = 0; // Current game score
-        this.moveAlienSpeed = 500; // Speed at which aliens move
+        this.moveAlienSpeed = 100; // Speed at which aliens move
         this.loadEntities(); // Load initial entities into the game
         this.textScore = new Score(this, [0, 0]); // Initialize the game score display
     }
@@ -100,6 +100,9 @@ class RetroGame extends Base {
                 this.step *= -1;
                 this.trip += 1;
                 for (const alien of aliens) {
+                    if (alien.coord[1] >= 470) {
+                        this.gameover();
+                    }
                     alien.coord[1] += Math.abs(this.step);
                     alien.coord[0] += this.step / Math.abs(this.step / 2);
                 }
@@ -116,10 +119,8 @@ class RetroGame extends Base {
      * Checks for game over conditions and ends the game if necessary.
      */
     gameover() {
-        if (this.trip > 15) {
-            this.destroy(); // Clean up and end the game
-            new ScoreMenu(this.app, this.score); // Display the score menu
-        }
+        this.destroy(); // Clean up and end the game
+        new ScoreMenu(this.app, this.score); // Display the score menu
     }
 
     /**
@@ -139,7 +140,6 @@ class RetroGame extends Base {
         this.delta += delta;
         this.moveAlien();
         this.textScore.update();
-        this.gameover();
         super.update(delta);
     }
 }

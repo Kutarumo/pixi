@@ -75,6 +75,11 @@ class RegisterScore {
         }
     }
 
+    destroy() {
+        super.destroy();
+        this.removeEventListener();
+    }
+
     /**
      * Saves the current pseudo and score to localStorage.
      */

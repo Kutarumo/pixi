@@ -32,6 +32,7 @@ class Player extends LivingEntity {
         this.owner = "player";
         this.isHit = false;
         this.hitTime = 0;
+        this.sprite.anchor.set(0.5);
 
         // Set up event listeners
         this.setupEventListeners();
@@ -93,7 +94,7 @@ class Player extends LivingEntity {
             // Shoot a bullet if space key is pressed
             if (!this.game.pool.filter(bullet => bullet instanceof Bullet).some(bullet => bullet.owner === this.owner)) {
                 // Create a new bullet and add it to the game's entity pool
-                this.game.addPoolEntity(new Bullet(this.game, [this.coord[0] + this.sprite.width / 2, this.coord[1]], 1, 1, 1, 3, this.game.texturesLoader.textures[2][0], 3, 0, this.owner));
+                this.game.addPoolEntity(new Bullet(this.game, [...this.coord], 1, 1, 1, 3, this.game.texturesLoader.textures[2][0], 3, 0, this.owner));
             }
         }
     }

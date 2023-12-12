@@ -1,6 +1,8 @@
 import { Base } from "../libs/base.js";
 import { RegisterScore } from "../ui/Register_score.js";
 import { ScoreList } from "../ui/score_list.js";
+import { MainMenu } from "./main_menu.js";
+import { MainGame } from "../ui/main_game.js";
 
 /**
  * Represents the score menu in the game.
@@ -18,6 +20,16 @@ class ScoreMenu extends Base {
         this.users = []; // Array to store user data (if needed)
         this.score = score; // The score to be displayed in the menu
         this.addScore(); // Initialize and display the score-related UI elements
+
+        this.main_game = new MainGame(this, [400, 300]);
+
+        // Configure interaction for the start game button
+        this.main_game.textObj.interactive = true;
+        this.main_game.textObj.buttonMode = true;
+        this.main_game.textObj.on("pointerdown", (event) => {
+            this.destroy();
+            new MainMenu(this.app);
+        });
     }
 
     /**
@@ -28,6 +40,7 @@ class ScoreMenu extends Base {
         this.add_score.removeEventListener(); // Remove event listeners from the RegisterScore instance
         this.app.stage.removeChild(this.add_score.textObj); // Remove the RegisterScore text object from the stage
         this.app.stage.removeChild(this.add_score_list.textObj); // Remove the ScoreList text object from the stage
+        this.app.stage.removeChild(this.main_game.textObj); // Remove the ScoreList text object from the stage
     }
 
     /**
