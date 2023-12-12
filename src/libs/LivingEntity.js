@@ -33,6 +33,12 @@ class LivingEntity extends Entity {
      */
     onDeath() {}
 
+    changeToDeathAnimation() {
+        this.sprite.textures = this.game.texturesLoader.textures[0][3];
+        this.sprite.animationSpeed = 0.06;
+        this.sprite.play();
+    }
+
     /**
      * Inflicts damage to the living entity.
      * @param {number} damage - The amount of damage to inflict.
@@ -40,14 +46,14 @@ class LivingEntity extends Entity {
     damage(damage) {
         // Reduce the health points based on the damage received
         this.hp -= damage;
-
+        this.changeToDeathAnimation();
         // Check if the living entity has run out of health points
         if (this.hp <= 0) {
             // Call the onDeath callback
             this.onDeath();
 
             // Remove the living entity from the game
-            this.remove();
+            setTimeout(() => this.remove(), 400)
             return;
         }
     }

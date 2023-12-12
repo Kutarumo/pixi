@@ -28,6 +28,10 @@ class Brique extends LivingEntity {
         this.sprite.width = width;
         this.sprite.height = height;
     }
+
+    changeToDeathAnimation() {
+
+    }
 }
 
 export { Brique };

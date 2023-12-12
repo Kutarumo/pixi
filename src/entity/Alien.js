@@ -47,7 +47,6 @@ class Alien extends LivingEntity {
      */
     onDeath() {
         this.game.score += this.score; // Increase the game score by the alien's score value
-        console.log(this.game.score); // Log the updated game score to the console
     }
 
     /**

@@ -53,6 +53,10 @@ class Bullet extends LivingEntity {
         return overlap;
     }
 
+    changeToDeathAnimation() {
+        
+    }
+
     /**
      * Updates the state of the bullet.
      * @param {number} delta - The time difference since the last update.

@@ -46,7 +46,7 @@ class RetroGame extends Base {
         }
 
         // Load player and score entities
-        this.addPoolEntity(new Player(this, [400, 600], 1, 3, 1, 3, this.texturesLoader.textures[1], 3, 0));
+        this.addPoolEntity(new Player(this, [400, 600], 3, 3, 1, 3, this.texturesLoader.textures[1][0], 3, 0));
     }
 
     /**

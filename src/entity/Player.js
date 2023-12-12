@@ -98,6 +98,16 @@ class Player extends LivingEntity {
         }
     }
 
+    changeToDeathAnimation() {
+        this.sprite.textures = this.game.texturesLoader.textures[1][1];
+        this.sprite.animationSpeed = 0.06;
+        this.sprite.play();
+        setTimeout(() => {
+            this.sprite.textures = this.game.texturesLoader.textures[1][0];
+        }, 2500);
+        
+    }
+
     /**
      * Handles player movement based on keyboard input.
      */

@@ -7,13 +7,10 @@ class TexturesLoader {
      */
     constructor() {
         // Initialize textures array with empty subarrays
-        this.textures = [[[], [], [], []], [], [[], [], [], []]];
+        this.textures = [[[], [], [], []], [[], []], [[], [], [], []]];
         
         // Base path for texture files
         this.BASE_PATH = './src/publics/';
-        
-        // Subfolders for each type of entity (alien, player, bullet)
-        this.path_floder = ['alien', 'player', 'bullet'];
 
         // Load textures for aliens, players, and bullets
         this.loadAliens();
@@ -33,7 +30,8 @@ class TexturesLoader {
         }
 
         // Load texture for alien death animation
-        this.textures[0].push(PIXI.Texture.from(this.BASE_PATH + "alien/death-1.png"));
+        this.textures[0][3].push(PIXI.Texture.from(this.BASE_PATH + "alien/death-1.png"));
+        this.textures[0][3].push(PIXI.Texture.from(this.BASE_PATH + "alien/death-2.png"));
     }
 
     /**
@@ -41,7 +39,12 @@ class TexturesLoader {
      */
     loadPlayer() {
         // Load texture for the player
-        this.textures[1].push(PIXI.Texture.from(this.BASE_PATH + "player/Player.png"));
+        this.textures[1][0].push(PIXI.Texture.from(this.BASE_PATH + "player/Player.png"));
+
+        // Load texture for alien death animation
+        this.textures[1][1].push(PIXI.Texture.from(this.BASE_PATH + "player/death-1.png"));
+        this.textures[1][1].push(PIXI.Texture.from(this.BASE_PATH + "player/death-2.png"));
+        this.textures[1][1].push(PIXI.Texture.from(this.BASE_PATH + "player/death-3.png"));
     }
 
     /**
