@@ -40,8 +40,8 @@ class Bullet extends LivingEntity {
         const width1 = this.sprite.width;
         const height1 = this.sprite.height;
 
-        const x2 = otherEntity.sprite.x - otherEntity.sprite.width / 2;
-        const y2 = otherEntity.sprite.y - otherEntity.sprite.height / 2;
+        const x2 = otherEntity.sprite.x;
+        const y2 = otherEntity.sprite.y;
         const width2 = otherEntity.sprite.width;
         const height2 = otherEntity.sprite.height;
 
